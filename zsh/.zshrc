@@ -14,6 +14,7 @@ alias reload='source ~/.zshrc && echo "✅ Shell reloaded"'
 alias back='cd -'
 
 # ─── 📝 CONFIG FILE SHORTCUTS ───────────────────────────────
+alias sync-config='~/raph_config/sync.sh'
 alias config='nvim ~/.zshrc'
 alias gconfig='nvim ~/.gitconfig'
 alias confposh='nvim ~/.config/oh-my-posh/zash.omp.json'
