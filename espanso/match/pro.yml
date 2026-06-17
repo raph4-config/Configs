@@ -36,3 +36,31 @@ matches:
   # Message opener
   - trigger: ";hi"
     replace: "Bonjour,\n\nJ'espère que tu vas bien."
+
+  # Follow-up reminder
+  - trigger: ";relance"
+    replace: "Petit message pour relancer sur le sujet ci-dessous. As-tu eu le temps d'y jeter un œil ?"
+
+  # Suggest a call
+  - trigger: ";call"
+    replace: "Est-ce qu'un point rapide en visio serait plus simple pour en discuter ? Dis-moi tes dispos."
+
+  # Ask for clarification
+  - trigger: ";clar"
+    replace: "Pour être sûr de bien comprendre, peux-tu me préciser [POINT] ?"
+
+  # Politely decline a slot
+  - trigger: ";nope"
+    replace: "Désolé, je ne suis pas disponible sur ce créneau. Peux-tu me proposer un autre moment ?"
+
+  # Flag a blocker
+  - trigger: ";blok"
+    replace: "Je suis bloqué sur [SUJET], j'aurais besoin d'un coup de main quand tu as un moment."
+
+  # Meeting recap
+  - trigger: ";recap"
+    replace: "Pour résumer ce qu'on s'est dit : [POINTS]. N'hésite pas si j'ai oublié quelque chose."
+
+  # Closing line
+  - trigger: ";cu"
+    replace: "Je reste dispo si besoin. Bonne journée !"

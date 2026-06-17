@@ -24,7 +24,8 @@ if command -v espanso &>/dev/null; then
     mkdir -p "$ESPANSO_DIR/config" "$ESPANSO_DIR/match"
     cp ~/raph_config/espanso/config/* "$ESPANSO_DIR/config/"
     cp ~/raph_config/espanso/match/* "$ESPANSO_DIR/match/"
-    espanso restart &>/dev/null
+    # launchd service is unreliable on this machine; run unmanaged
+    espanso restart --unmanaged &>/dev/null || espanso start --unmanaged &>/dev/null
     echo "✅ Espanso"
 else
     echo "⚠️  Espanso not installed, skipped"
