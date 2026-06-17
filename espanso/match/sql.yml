@@ -1,0 +1,43 @@
+# ─── SQL — Snowflake ─────────────────────────────────────────
+# Trigger prefix: ;q   ($|$ marks the cursor after expansion)
+
+matches:
+  # SELECT * FROM
+  - trigger: ";qsel"
+    replace: "SELECT *\nFROM $|$"
+
+  # Row count
+  - trigger: ";qcnt"
+    replace: "SELECT COUNT(*)\nFROM $|$"
+
+  # Datetime -> date
+  - trigger: ";qd2d"
+    replace: "$|$::DATE"
+
+  # Cast to date
+  - trigger: ";qtodate"
+    replace: "TO_DATE($|$)"
+
+  # Truncate to period
+  - trigger: ";qtrunc"
+    replace: "DATE_TRUNC('month', $|$)"
+
+  # Add interval
+  - trigger: ";qdadd"
+    replace: "DATEADD('day', 1, $|$)"
+
+  # Difference between dates
+  - trigger: ";qddiff"
+    replace: "DATEDIFF('day', $|$, )"
+
+  # Current date
+  - trigger: ";qcdate"
+    replace: "CURRENT_DATE"
+
+  # Current timestamp
+  - trigger: ";qcts"
+    replace: "CURRENT_TIMESTAMP()"
+
+  # Limit rows
+  - trigger: ";qlimit"
+    replace: "LIMIT 100"

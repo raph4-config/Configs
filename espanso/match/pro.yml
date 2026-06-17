@@ -1,0 +1,38 @@
+# ─── PRO — professional messages ────────────────────────────
+# Trigger prefix: ;  (text is French, except ;ooo in English)
+
+matches:
+  - trigger: ";mail"
+    replace: "arn@ibanfirst.com"
+
+  # Out-of-office auto-reply (English)
+  - trigger: ";ooo"
+    replace: "Hello,\n\nThank you for your message. I'm currently out of office until [DATE] with limited access to email. For anything urgent, please reach out to [CONTACT].\n\nI'll get back to you as soon as I'm back.\n\nBest regards,\nRaphaël"
+
+  # Share a PR for review
+  - trigger: ";rev"
+    replace: "Salut, peux-tu relire ma PR quand tu as un moment ? [LIEN]\nMerci d'avance pour ton retour."
+
+  # I'm on it / work in progress
+  - trigger: ";wip"
+    replace: "Je suis dessus, je te tiens au courant dès que c'est bon de mon côté."
+
+  # It's done
+  - trigger: ";done"
+    replace: "C'est fait de mon côté, n'hésite pas si tu as des questions."
+
+  # Ask for 2 minutes
+  - trigger: ";dispo"
+    replace: "Salut, tu aurais 2 minutes ?"
+
+  # Acknowledge receipt
+  - trigger: ";ack"
+    replace: "Bien reçu, je regarde ça et je reviens vers toi rapidement."
+
+  # Thanks
+  - trigger: ";thx"
+    replace: "Merci beaucoup pour ton aide !"
+
+  # Message opener
+  - trigger: ";hi"
+    replace: "Bonjour,\n\nJ'espère que tu vas bien."

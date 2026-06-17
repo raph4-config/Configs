@@ -1,0 +1,8 @@
+# Espanso default profile
+# https://espanso.org/docs/configuration/
+
+# Restore clipboard after an expansion
+preserve_clipboard: true
+
+# Backend used to inject text (clipboard is the most reliable on macOS)
+backend: Clipboard

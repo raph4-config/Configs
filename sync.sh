@@ -18,6 +18,18 @@ echo "✅ WezTerm"
 cp -r ~/raph_config/nvim/* ~/.config/nvim/
 echo "✅ Neovim"
 
+# ─── ESPANSO ────────────────────────────────────────────────
+if command -v espanso &>/dev/null; then
+    ESPANSO_DIR="$(espanso path config)"
+    mkdir -p "$ESPANSO_DIR/config" "$ESPANSO_DIR/match"
+    cp ~/raph_config/espanso/config/* "$ESPANSO_DIR/config/"
+    cp ~/raph_config/espanso/match/* "$ESPANSO_DIR/match/"
+    espanso restart &>/dev/null
+    echo "✅ Espanso"
+else
+    echo "⚠️  Espanso not installed, skipped"
+fi
+
 # ─── RELOAD ZSH ─────────────────────────────────────────────
 source ~/.zshrc
 echo ""

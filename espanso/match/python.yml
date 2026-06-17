@@ -1,0 +1,35 @@
+# ─── PYTHON — dev snippets ───────────────────────────────────
+# Trigger prefix: ;p   ($|$ marks the cursor after expansion)
+
+matches:
+  # Main guard
+  - trigger: ";pmain"
+    replace: "if __name__ == \"__main__\":\n    $|$"
+
+  # Function definition
+  - trigger: ";pdef"
+    replace: "def $|$():\n    "
+
+  # Class definition
+  - trigger: ";pcls"
+    replace: "class $|$:\n    def __init__(self):\n        "
+
+  # Module logger
+  - trigger: ";plog"
+    replace: "import logging\n\nlogger = logging.getLogger(__name__)"
+
+  # Try / except block
+  - trigger: ";ptry"
+    replace: "try:\n    $|$\nexcept Exception as e:\n    "
+
+  # f-string
+  - trigger: ";pf"
+    replace: "f\"$|$\""
+
+  # Breakpoint
+  - trigger: ";pbp"
+    replace: "breakpoint()"
+
+  # List comprehension
+  - trigger: ";plc"
+    replace: "[$|$ for x in ]"
