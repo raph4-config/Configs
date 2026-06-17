@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / temp
+*.swp
+*.swo
+*~
+
+# Local Claude Code overrides
+.claude/settings.local.json
+
+# Credentials
+.env
+.env.*
+*.key
+*.pem
+*.token
+*credentials*
+*secret*
