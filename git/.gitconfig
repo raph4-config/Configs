@@ -1,0 +1,48 @@
+[user]
+	name = Ange-Raphael
+	email = arn@ibanfirst.com
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[credential]
+	helper = osxkeychain
+
+[core]
+	excludesfile = /Users/arn/.gitignore_global
+
+# ─── ALIASES ────────────────────────────────────────────────
+[alias]
+	# checkout
+	co = checkout
+	cob = checkout -b              # g cob new_branch_name
+
+	# push
+	psb = push -u origin           # g psb name_branche  (ou g psb seul pour la branche courante)
+	pf = push --force-with-lease
+
+	# log
+	lo = log --oneline --graph --decorate -20
+	log-all = log --oneline --graph --decorate --all
+
+	# status / diff
+	st = status -sb
+	df = diff
+	dfs = diff --staged
+
+	# commit / staging
+	aa = add --all
+	cm = commit -m
+	amend = commit --amend --no-edit
+	undo = reset --soft HEAD~1
+
+	# branches
+	br = branch
+	sw = switch
+
+	# remote
+	pl = pull
+	f = fetch --all --prune
