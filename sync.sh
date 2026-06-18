@@ -10,6 +10,10 @@ echo "✅ .zshrc"
 cp ~/raph_config/zsh/zash.omp.json ~/.config/oh-my-posh/zash.omp.json
 echo "✅ Oh My Posh theme"
 
+# ─── GIT ────────────────────────────────────────────────────
+cp ~/raph_config/git/.gitconfig ~/.gitconfig
+echo "✅ Git"
+
 # ─── WEZTERM ────────────────────────────────────────────────
 cp ~/raph_config/wezterm/.wezterm.lua ~/.wezterm.lua
 echo "✅ WezTerm"
