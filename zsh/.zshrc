@@ -175,3 +175,4 @@ alias fz='open /Applications/FileZilla.app'
 
 alias db='open /Applications/DBeaver.app'
 alias cc='claude'
+alias mcpcc='set -a && source .env && claude --strict-mcp-config --mcp-config .mcp.json'
