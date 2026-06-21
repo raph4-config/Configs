@@ -15,5 +15,5 @@ Personal macOS dotfiles.
 
 ## Install
 
-- Config path: here (this repo is the source of truth)
-- Command to synchronise: `./sync.sh`
+- Config path: `~/raph_config` (this repo is the source of truth)
+- Command to synchronise: `sync-config`
