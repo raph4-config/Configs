@@ -4,6 +4,10 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/zash.omp.json)"
 # ─── HOMEBREW ───────────────────────────────────────────────
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
+# ─── 🛠️ LOCAL BIN ───────────────────────────────────────────
+# User-installed CLIs (qmk, uv, ...) live here
+export PATH="$HOME/.local/bin:$PATH"
+
 # ─── BASIC ALIASES ──────────────────────────────────────────
 alias e='nvim'
 alias g='git'
