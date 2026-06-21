@@ -73,22 +73,20 @@ Left Hand (RGB OFF)                   Right Hand (Media Keys)
 
 **Split** keyboard (Corne / crkbd), Pro Micro, `caterina` bootloader. The **same firmware** is flashed onto each half, one half at a time.
 
-> Replace `<keyboard>` and `<keymap>` with your own, e.g. `qmk flash -kb crkbd -km arn`.
-
 ### 1. Copy the keymap into the QMK tree (if not done yet)
 ```sh
 # From this repo, into your qmk_firmware clone
-cp keymap.c config.h rules.mk ~/qmk_firmware/keyboards/<keyboard>/keymaps/<keymap>/
+cp keymap.c config.h rules.mk ~/qmk_firmware/keyboards/crkbd/keymaps/arn/
 ```
 
 ### 2. Compile (make sure it builds before flashing)
 ```sh
-qmk compile -kb <keyboard> -km <keymap>
+qmk compile -kb crkbd -km arn
 ```
 
 ### 3. Flash the LEFT half
 ```sh
-qmk flash -kb <keyboard> -km <keymap>
+qmk flash -kb crkbd -km arn
 ```
 When `qmk` prints **"Detecting caterina bootloader…"**:
 1. Plug in **only** the left half over USB.
@@ -98,7 +96,7 @@ When `qmk` prints **"Detecting caterina bootloader…"**:
 ### 4. Flash the RIGHT half
 Run the exact same command, then plug in and reset the right half:
 ```sh
-qmk flash -kb <keyboard> -km <keymap>
+qmk flash -kb crkbd -km arn
 ```
 1. Unplug the left, plug in **only** the right half.
 2. Reset / bootloader (same `QK_BOOT` key on the ADJUST layer).
