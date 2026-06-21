@@ -12,6 +12,7 @@ Personal macOS dotfiles.
 | `nvim/` | Neovim (LazyVim) |
 | `keyboard/` | QMK split-keyboard firmware |
 | `espanso/` | Espanso text expansion |
+| `shortcuts/` | Cheat-sheets (macOS, terminal, LazyVim) |
 
 ## Install
 
