@@ -11,6 +11,9 @@
 #define PERMISSIVE_HOLD
 #define TAPPING_FORCE_HOLD
 
+// Caps Word: tap both shifts to UPPERCASE one word, auto-off at space
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
 // ============================================================================
 // OLED DISPLAY (if present)
 // ============================================================================
