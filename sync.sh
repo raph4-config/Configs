@@ -35,6 +35,15 @@ else
     echo "⚠️  Espanso not installed, skipped"
 fi
 
+# ─── KEYBOARD (QMK) ─────────────────────────────────────────
+QMK_KEYMAP="$HOME/qmk_firmware/keyboards/crkbd/keymaps/arn"
+if [ -d "$QMK_KEYMAP" ]; then
+    cp ~/raph_config/keyboard/keymap.c ~/raph_config/keyboard/config.h ~/raph_config/keyboard/rules.mk "$QMK_KEYMAP/"
+    echo "✅ Keyboard (QMK keymap, compile/flash stays manual)"
+else
+    echo "⚠️  QMK keymap dir not found, skipped"
+fi
+
 # ─── RELOAD ZSH ─────────────────────────────────────────────
 source ~/.zshrc
 echo ""
