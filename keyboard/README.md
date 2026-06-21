@@ -10,10 +10,11 @@ Left Hand                              Right Hand
 ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
 │SFT│ W │ X │ C │ V │ B │            │ N │ , │ . │ ' │ _ │SFT│
 └───┴───┴───┼───┼───┼───┤            ├───┼───┼───┼───┴───┴───┘
-            │GUI│LOW│SPC│            │BSP│RAI│ : │
+            │GUI│LOW│SPC│            │BSP│RAI│ALT│
             └───┴───┴───┘            └───┴───┴───┘
 ```
-**Python direct**: `'` `_` `:` `.` `,` → No LOWER needed!
+**Mac mods**: `GUI` = ⌘ Cmd (left thumb) · `ALT` = ⌥ Option (right thumb)
+**Python direct**: `'` `_` `.` `,` → No LOWER needed! (`:` via LOWER/RAISE)
 
 ---         
 
@@ -65,4 +66,45 @@ Left Hand (RGB OFF)                   Right Hand (Media Keys)
             └───┴───┴───┘            └───┴───┴───┘
 ```
 **Access**: Hold LOWER + RAISE | **Reset**: Top-left for bootloader mode
+
+---
+
+## 🔧 Flashing the keyboard (both halves)
+
+**Split** keyboard (Corne / crkbd), Pro Micro, `caterina` bootloader. The **same firmware** is flashed onto each half, one half at a time.
+
+> Replace `<keyboard>` and `<keymap>` with your own, e.g. `qmk flash -kb crkbd -km arn`.
+
+### 1. Copy the keymap into the QMK tree (if not done yet)
+```sh
+# From this repo, into your qmk_firmware clone
+cp keymap.c config.h rules.mk ~/qmk_firmware/keyboards/<keyboard>/keymaps/<keymap>/
 ```
+
+### 2. Compile (make sure it builds before flashing)
+```sh
+qmk compile -kb <keyboard> -km <keymap>
+```
+
+### 3. Flash the LEFT half
+```sh
+qmk flash -kb <keyboard> -km <keymap>
+```
+When `qmk` prints **"Detecting caterina bootloader…"**:
+1. Plug in **only** the left half over USB.
+2. Put it in bootloader mode: press **reset** (or double-tap), or use the `RESET`/`QK_BOOT` key on the **ADJUST** layer (top-left).
+3. Flashing starts automatically once the caterina port is detected.
+
+### 4. Flash the RIGHT half
+Run the exact same command, then plug in and reset the right half:
+```sh
+qmk flash -kb <keyboard> -km <keymap>
+```
+1. Unplug the left, plug in **only** the right half.
+2. Reset / bootloader (same `QK_BOOT` key on the ADJUST layer).
+3. Flashing starts again on its own.
+
+### Notes
+- Firmware is **identical** on both sides: `SPLIT_USB_DETECT` handles master/slave detection automatically.
+- No handedness to set here: this keymap relies on `SPLIT_USB_DETECT` (see `config.h`), so the same `.hex` goes on both halves.
+- If the bootloader isn't detected: quickly double-tap the reset button, or bridge `RST`–`GND` twice.
