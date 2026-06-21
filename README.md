@@ -19,13 +19,3 @@ Personal macOS dotfiles.
 ```
 
 Copies every config into place (`~`, `~/.config`) and reloads the shell.
-
-## Commits
-
-Gitmoji prefix via the `gc` function in `zsh/.zshrc`:
-
-```
-gc feat :add docker aliases   →   ✨ feat: add docker aliases
-```
-
-Types: `fix 🐛` · `feat ✨` · `docs 📝` · `style 💄` · `refactor ♻️` · `test ✅` · `chore 🚀` · `config 🔧`
