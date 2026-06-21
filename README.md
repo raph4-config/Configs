@@ -7,6 +7,7 @@ Personal macOS dotfiles.
 | Dir | Config |
 |-----|--------|
 | `zsh/` | zsh, aliases, oh-my-posh theme |
+| `git/` | git config and aliases |
 | `wezterm/` | WezTerm terminal |
 | `nvim/` | Neovim (LazyVim) |
 | `keyboard/` | QMK split-keyboard firmware |
@@ -14,8 +15,5 @@ Personal macOS dotfiles.
 
 ## Install
 
-```sh
-./sync.sh
-```
-
-Copies every config into place (`~`, `~/.config`) and reloads the shell.
+- Config path: here (this repo is the source of truth)
+- Command to synchronise: `./sync.sh`
