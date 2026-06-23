@@ -1,6 +1,6 @@
 return {
-  -- Explorateur de fichiers
-  { "nvim-neo-tree/neo-tree.nvim", opts = {} },
+  -- Explorateur de fichiers : on garde celui de snacks (defaut LazyVim), neo-tree desactive
+  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
 
   -- Indentation visuelle
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
