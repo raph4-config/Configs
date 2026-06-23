@@ -34,6 +34,8 @@
 	dfs = diff --staged
 
 	# commit / staging
+	a = add                        # g a <file>
+	au = add -u                    # g au  (stage tracked changes)
 	aa = add --all
 	cm = commit -m
 	amend = commit --amend --no-edit
