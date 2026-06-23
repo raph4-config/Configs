@@ -36,6 +36,7 @@ alias test='poetry run pytest'
 alias linter='poetry run pre-commit run --all-files'
 alias pyvenv='[ -d .venv ] && source .venv/bin/activate || (python3.12 -m venv .venv && source .venv/bin/activate)'
 alias renv='rm -rf .venv && echo "✅ .venv deleted"'
+alias dbtibf='/Users/arn/ibanfirst/dbt_ibf/.venv/bin/dbt'
 
 # ─── 💄 GITMOJI COMMIT ──────────────────────────────────────
 gc() {
