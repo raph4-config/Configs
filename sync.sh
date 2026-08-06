@@ -35,6 +35,12 @@ else
     echo "⚠️  Espanso not installed, skipped"
 fi
 
+# ─── CLAUDE CODE ────────────────────────────────────────────
+# exact mirror: a skill removed or renamed here disappears locally too
+mkdir -p ~/.claude/skills
+rsync -a --delete ~/raph_config/claude/skills/ ~/.claude/skills/
+echo "✅ Claude Code skills ($(ls -1 ~/.claude/skills | tr '\n' ' '))"
+
 # ─── KEYBOARD (QMK) ─────────────────────────────────────────
 QMK_KEYMAP="$HOME/qmk_firmware/keyboards/crkbd/keymaps/arn"
 if [ -d "$QMK_KEYMAP" ]; then
