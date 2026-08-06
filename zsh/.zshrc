@@ -16,6 +16,7 @@ alias py='python3.12'
 alias python3='python3.12'
 alias reload='source ~/.zshrc && echo "✅ Shell reloaded"'
 alias back='cd -'
+alias cce='set -a && source .env && claude'
 
 # ─── 📝 CONFIG FILE SHORTCUTS ───────────────────────────────
 alias sync-config='~/raph_config/sync.sh'
