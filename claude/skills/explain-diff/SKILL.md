@@ -63,21 +63,46 @@ Never clone into the user's own directories, and never `rm -rf` a path other tha
 
 The goal is that the reader understands what the code now does without reading every file, and knows exactly where to focus during review.
 
+Readability is part of the job. A dense wall of prose is a failed explanation, even when every
+sentence in it is correct. Keep sentences short, break lines often, and give every idea its own
+visual slot so the reader can skim first and dive second.
+
 In English, three sections, nothing else:
 
 ```markdown
 ## Summary
-<what the PR changes, at the intent level, 1 to 3 lines>
+<what the PR changes, at the intent level, 1 to 3 short lines. Then, if the PR touches a
+list of things (options, endpoints, files, flags), put that list on its own line below
+instead of cramming it into the sentence.>
 
 ## How
-<the mechanism, 2 to 5 lines. Follow the main path end to end: what triggers the new code,
-what it does, what it returns or writes. Name the key function or module. Explain the
-non-obvious parts, an unusual data structure, a retry, a lock, a fallback.>
+<the mechanism. Follow the main path end to end: what triggers the new code, what it does,
+what it returns or writes. Name the key function or module. Explain the non-obvious parts,
+an unusual data structure, a retry, a lock, a fallback.
+
+Prose if it is one path, 2 to 5 lines. A numbered list if the change lands in several
+distinct places, one entry each, so the reader sees the shape at a glance.>
 
 ## Review points
-<bullets, most important first. Each one says what to look at, where, and why it matters.
-Write "Nothing notable" if it is clean.>
+<one numbered block per point, most important first. Never a flat bullet list of long
+sentences. Each block is:
+
+**<n>. <emoji> <the claim, one short line, bold>**
+<1 to 2 plain lines: where it is and why it matters, with `file.py:line` when it helps.>
+→ <the action or the open question, only when there is one.>
+
+Leave a blank line between blocks. Write "Nothing notable" if it is clean.>
 ```
+
+Emoji are severity markers on those bold claim lines, not decoration. Use exactly this set,
+and nothing else:
+- 🔴 it can break: correctness bug, security hole, data loss, race
+- 🟠 blast radius: behavior change for existing users, unchanged caller, breaking API or schema
+- 🟡 worth a second opinion: hardcoded value, new dependency, missing coverage, chosen tradeoff
+- 🟢 checked and fine: a claim from the PR description you verified, or a risk you ruled out
+
+Skip the emoji entirely on a short PR with one or two points, where they add noise instead of
+structure.
 
 What belongs in Review points:
 - Logic that can break: unhandled edge case, wrong boundary, silent failure, race
@@ -95,26 +120,40 @@ Rules:
 - Do not restate the diff, explain intent and consequence
 - Name a file or symbol only when it matters to the point being made
 - State what you could not verify instead of guessing
-- No filler openers, no emoji, never use the em dash character
+- One idea per block. If a point needs three sentences to land, it is two points
+- No filler openers, never use the em dash character
+- Emoji only as the severity markers above, never inside a sentence
 
 **Example:**
 ```markdown
 ## Summary
-Caches quote responses in Redis with a 60s TTL to absorb repeated calls from the front end.
+Caches quote responses in Redis with a 60s TTL, to absorb repeated calls from the front end.
 
 ## How
-A `@cached` decorator wraps the `/quotes` handler. The cache key combines the currency
-pair and the rounded amount, so near-identical requests share an entry. A miss falls
-through to the existing pricing call unchanged.
+A `@cached` decorator wraps the `/quotes` handler. The cache key combines the currency pair
+and the rounded amount, so near-identical requests share an entry. A miss falls through to
+the existing pricing call unchanged.
 
 ## Review points
-- No invalidation when a rate changes, so a quote can be stale for up to 60s. On a volatile
-  pair this is a wrong price shown to the user, worth confirming it is intended
-- `get_quote` is also called by the batch job in `jobs/pricing.py`, which now hits the cache
-  too. That path expects fresh rates
-- The amount is rounded to build the key, so 100.4 and 100.6 share an entry
-- The TTL is hardcoded in the decorator rather than read from config
-- No test covers a cache hit returning a stale value
+
+**1. 🔴 A stale quote can be shown as a live price**
+Nothing invalidates the entry when a rate moves, so the price can be up to 60s old. On a
+volatile pair that is a wrong number in front of the user.
+→ Confirm this is intended, or invalidate on rate update.
+
+**2. 🟠 The batch job now hits the cache too**
+`get_quote` is also called from `jobs/pricing.py:88`, a path that expects fresh rates.
+→ Either bypass the cache there or accept the staleness explicitly.
+
+**3. 🟡 Rounding collapses distinct amounts**
+The key is built from the rounded amount, so 100.4 and 100.6 share an entry.
+
+**4. 🟡 TTL is hardcoded**
+It lives in the decorator rather than in config, so it cannot be tuned per environment.
+
+**5. 🟡 No test for a stale hit**
+The cache-hit path is covered, but no test asserts what happens once the underlying rate
+has changed.
 ```
 
 ## 6. Clean up
