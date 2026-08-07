@@ -30,6 +30,9 @@ PCT=${FIELD[3]}      USED=${FIELD[4]}      SIZE=${FIELD[5]}
 COST=${FIELD[6]}     DUR=${FIELD[7]}       PR=${FIELD[8]}
 PR_STATE=${FIELD[9]} RL5=${FIELD[10]}      WT=${FIELD[11]}
 
+# "Opus 5 (1M context)" -> "Opus 5" : la taille est deja dans le compteur de tokens.
+MODEL=${MODEL%% (*}
+
 # Garde-fou : un PCT hors bornes ferait exploser la boucle de la barre.
 PCT=${PCT%%.*}; PCT=${PCT:-0}
 (( PCT < 0 ))   && PCT=0
