@@ -55,10 +55,10 @@ E=$(( W - F )); BAR=""
 
 fmt() { awk -v n="$1" 'BEGIN{if(n>=1e6)printf "%.1fM",n/1e6; else if(n>=1e3)printf "%.0fk",n/1e3; else printf "%d",n}'; }
 
-# ─── LIGNE 1 : identite de la session ───────────────────────
+# ─── LIGNE 1 : modele, contexte, cout ───────────────────────
 # Pas de dossier ni de branche : deja visibles ailleurs, et ca evite tout appel git.
 L1="🧠 ${BLUE}${MODEL}${RESET}"
-[[ -n $EFFORT ]] && L1+=" ${DIM}${EFFORT}${RESET}"
+[[ -n $EFFORT ]] && L1+=" ${DIM}(${EFFORT})${RESET}"
 [[ -n $FAST   ]] && L1+=" ⚡"
 [[ -n $WT     ]] && L1+="  🌳 ${WT}"
 if [[ -n $PR ]]; then
@@ -72,10 +72,14 @@ if [[ -n $PR ]]; then
   L1+="  🔀 #${PR} ${S}"
 fi
 
-# ─── LIGNE 2 : consommation ─────────────────────────────────
-L2="${C}${BAR}${RESET} ${PCT}% ${DIM}$(fmt "$USED")/$(fmt "$SIZE")${RESET}"
-L2+="  💰 $(printf "%.2f" "${COST:-0}")\$"
-(( DUR > 0 )) && L2+="  ⏱ ${DUR}m"
-[[ -n $RL5 ]] && L2+="  📊 ${RL5%.*}% 5h"
+L1+="  ${C}${BAR}${RESET} ${PCT}% ${DIM}$(fmt "$USED")/$(fmt "$SIZE")${RESET}"
+L1+="  💰 $(printf "%.2f" "${COST:-0}")\$"
 
-printf '%s\n%s\n' "$L1" "$L2"
+# ─── LIGNE 2 : duree et quota ───────────────────────────────
+L2=""
+(( DUR > 0 ))  && L2+="⏱ ${DUR}m"
+[[ -n $RL5 ]]  && { [[ -n $L2 ]] && L2+="  "; L2+="📊 ${RL5%.*}%-5h"; }
+
+# Ligne 2 omise si elle est vide, sinon une rangee blanche apparait.
+printf '%s\n' "$L1"
+[[ -n $L2 ]] && printf '%s\n' "$L2"
