@@ -34,14 +34,32 @@ gh pr diff <target>
 
 Read the actual diff, not just the file list. On a large diff, focus on source changes and skip lockfiles, generated code, and snapshots, then say what you skipped.
 
-A diff alone is not enough to understand the code. When a clone is available, also:
-- open the changed files around the hunks, so you see the functions the diff sits in
+A diff alone is not enough to understand the code. You also need the surrounding source, so:
+- open the changed files around the hunks, to see the functions the diff sits in
 - find the callers of anything whose signature or behavior changed (`grep` the symbol), to know what else is affected
 - check whether tests cover the changed path
 
 This is how you catch what the diff hides: a caller that was not updated, a branch that is now dead, an error case that stopped being handled.
 
-## 4. Write the explanation
+## 4. Get the source
+
+If the current directory is already a clone of the target repo, use it and skip this step.
+
+Otherwise clone the PR head into a scratch directory. Wipe the scratch directory first, so a leftover from an interrupted run never gets reused:
+
+```bash
+WORK="${TMPDIR:-/tmp}/claude-explain-diff"
+rm -rf "$WORK" && mkdir -p "$WORK"
+gh repo clone <owner>/<repo> "$WORK/repo" -- --depth=1 --quiet
+git -C "$WORK/repo" fetch --depth=1 --quiet origin pull/<N>/head
+git -C "$WORK/repo" checkout --quiet FETCH_HEAD
+```
+
+Fetching the `pull/<N>/head` ref works for fork PRs too, unlike cloning a branch name. Read and grep inside `$WORK/repo`.
+
+Never clone into the user's own directories, and never `rm -rf` a path other than `$WORK`.
+
+## 5. Write the explanation
 
 The goal is that the reader understands what the code now does without reading every file, and knows exactly where to focus during review.
 
@@ -98,3 +116,13 @@ through to the existing pricing call unchanged.
 - The TTL is hardcoded in the decorator rather than read from config
 - No test covers a cache hit returning a stale value
 ```
+
+## 6. Clean up
+
+If you cloned in step 4, delete the clone in the same turn, right after writing the explanation:
+
+```bash
+rm -rf "${TMPDIR:-/tmp}/claude-explain-diff"
+```
+
+Do this even if the analysis failed halfway. Nothing is left on disk outside the user's own clones.
