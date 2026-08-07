@@ -14,7 +14,6 @@ while IFS= read -r line; do FIELD+=("$line"); done < <(jq -r '[
     .model.display_name,
     (.effort.level // ""),
     (if .fast_mode then "1" else "" end),
-    .workspace.current_dir,
     ((.context_window.used_percentage // 0) | floor),
     (.context_window.total_input_tokens // 0),
     (.context_window.context_window_size // 0),
@@ -26,11 +25,10 @@ while IFS= read -r line; do FIELD+=("$line"); done < <(jq -r '[
     (.workspace.git_worktree // .worktree.name // "")
   ] | .[] | tostring' <<<"$input")
 
-MODEL=${FIELD[0]}    EFFORT=${FIELD[1]}   FAST=${FIELD[2]}
-DIR=${FIELD[3]}      PCT=${FIELD[4]}      USED=${FIELD[5]}
-SIZE=${FIELD[6]}     COST=${FIELD[7]}     DUR=${FIELD[8]}
-PR=${FIELD[9]}       PR_STATE=${FIELD[10]} RL5=${FIELD[11]}
-WT=${FIELD[12]}
+MODEL=${FIELD[0]}    EFFORT=${FIELD[1]}    FAST=${FIELD[2]}
+PCT=${FIELD[3]}      USED=${FIELD[4]}      SIZE=${FIELD[5]}
+COST=${FIELD[6]}     DUR=${FIELD[7]}       PR=${FIELD[8]}
+PR_STATE=${FIELD[9]} RL5=${FIELD[10]}      WT=${FIELD[11]}
 
 # Garde-fou : un PCT hors bornes ferait exploser la boucle de la barre.
 PCT=${PCT%%.*}; PCT=${PCT:-0}
@@ -54,16 +52,11 @@ E=$(( W - F )); BAR=""
 
 fmt() { awk -v n="$1" 'BEGIN{if(n>=1e6)printf "%.1fM",n/1e6; else if(n>=1e3)printf "%.0fk",n/1e3; else printf "%d",n}'; }
 
-BRANCH=$(git -C "$DIR" branch --show-current 2>/dev/null)
-DIRTY=""
-[[ -n $BRANCH && -n $(git -C "$DIR" status --porcelain -uno 2>/dev/null) ]] && DIRTY="✱"
-
 # ─── LIGNE 1 : identite de la session ───────────────────────
+# Pas de dossier ni de branche : deja visibles ailleurs, et ca evite tout appel git.
 L1="🧠 ${BLUE}${MODEL}${RESET}"
 [[ -n $EFFORT ]] && L1+=" ${DIM}${EFFORT}${RESET}"
 [[ -n $FAST   ]] && L1+=" ⚡"
-L1+="  📁 ${DIR##*/}"
-[[ -n $BRANCH ]] && L1+="  🌿 ${BRANCH}${DIRTY}"
 [[ -n $WT     ]] && L1+="  🌳 ${WT}"
 if [[ -n $PR ]]; then
   case $PR_STATE in

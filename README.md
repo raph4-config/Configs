@@ -29,5 +29,5 @@ manual step, because `~/.claude/settings.json` is not synced:
 "statusLine": { "type": "command", "command": "~/.claude/statusline.sh", "padding": 2 }
 ```
 
-Requires `jq`. Shows model, effort, directory, branch, PR, plus a context bar that turns yellow
-at 50% and red at 80%, with cost, session duration and the 5-hour quota.
+Requires `jq`. Shows model, effort, worktree and PR, plus a context bar that turns yellow at 50%
+and red at 80%, with cost, session duration and the 5-hour quota.
