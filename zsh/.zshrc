@@ -3,6 +3,8 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/zash.omp.json)"
 
 # ─── HOMEBREW ───────────────────────────────────────────────
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+# ce compte n'est pas admin : les casks vont dans ~/Applications, sinon brew tente un sudo
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 # ─── 🛠️ LOCAL BIN ───────────────────────────────────────────
 # User-installed CLIs (qmk, uv, ...) live here

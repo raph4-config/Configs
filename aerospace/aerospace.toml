@@ -1,0 +1,131 @@
+# ─── AEROSPACE ──────────────────────────────────────────────
+# Tiling window manager. Modifier principal : alt (⌥).
+# Doc : https://nikitabobko.github.io/AeroSpace/guide
+
+start-at-login = true
+
+# Normalisation de l'arbre : evite les conteneurs imbriques inutiles
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'  # horizontal si ecran large, sinon vertical
+accordion-padding = 30
+
+# La souris suit le focus (et inversement au changement d'ecran)
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
+
+# Les apps masquees (cmd+H) ne se reaffichent pas toutes seules
+automatically-unhide-macos-hidden-apps = false
+
+[key-mapping]
+preset = 'qwerty'
+
+# ─── GAPS ───────────────────────────────────────────────────
+[gaps]
+inner.horizontal = 8
+inner.vertical   = 8
+outer.left       = 8
+outer.right      = 8
+outer.top        = 8
+outer.bottom     = 8
+
+# ─── MODE PRINCIPAL ─────────────────────────────────────────
+[mode.main.binding]
+
+# Lancer / focus WezTerm
+alt-enter = '''exec-and-forget osascript -e 'tell application "WezTerm" to activate' '''
+
+# Layouts
+alt-slash = 'layout tiles horizontal vertical'      # bascule tiles h/v
+alt-comma = 'layout accordion horizontal vertical'  # bascule accordion h/v
+alt-f = 'fullscreen'
+alt-shift-space = 'layout floating tiling'          # flottant <-> tuile
+
+# Focus (hjkl comme vim : alt+fleches est reserve a macOS pour le texte)
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Deplacer la fenetre
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Redimensionner
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-shift-equal = 'balance-sizes'
+
+# Workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Envoyer la fenetre vers un workspace
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# Navigation rapide
+alt-tab = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Modes
+alt-shift-semicolon = 'mode service'
+alt-shift-enter = 'mode join'
+
+# ─── MODE SERVICE ───────────────────────────────────────────
+# alt+shift+; puis une touche
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']   # remet l'arbre a plat
+f = ['layout floating tiling', 'mode main']
+backspace = ['close-all-windows-but-current', 'mode main']
+
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# ─── MODE JOIN ──────────────────────────────────────────────
+# alt+shift+enter puis une direction : regroupe la fenetre voisine
+[mode.join.binding]
+esc = 'mode main'
+h = ['join-with left', 'mode main']
+j = ['join-with down', 'mode main']
+k = ['join-with up', 'mode main']
+l = ['join-with right', 'mode main']
+
+# ─── FENETRES FLOTTANTES ────────────────────────────────────
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = 'Copy|Copie|Info|Infos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
