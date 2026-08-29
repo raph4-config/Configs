@@ -13,9 +13,26 @@ enum layers {
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define ADJUST MO(_ADJUST)
-#define LOWER MO(_LOWER)
-#define RAISE MO(_RAISE)
-#define ADJUST MO(_ADJUST)
+
+// ============================================================================
+// HOME ROW MODS - tap = letter, hold = modifier
+// ============================================================================
+//
+//   q  s  d  f          j  k  l  m
+//   ⌘  ⌥  ⌃  ⇧          ⇧  ⌃  ⌥  ⌘
+//
+// Mirrored, so every modifier exists on both hands. CHORDAL_HOLD (config.h)
+// only lets a hold through when the other key is on the opposite hand.
+
+#define HM_Q LGUI_T(KC_Q)
+#define HM_S LALT_T(KC_S)
+#define HM_D LCTL_T(KC_D)
+#define HM_F LSFT_T(KC_F)
+
+#define HM_J RSFT_T(KC_J)
+#define HM_K RCTL_T(KC_K)
+#define HM_L RALT_T(KC_L)
+#define HM_M RGUI_T(KC_M)
 
 
 // ============================================================================
@@ -29,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_A,    KC_Z,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_DEL,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       KC_ESC,    KC_Q,    KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,     KC_J,   KC_K,    KC_L,    KC_M,    KC_ENT,
+       KC_ESC,   HM_Q,    HM_S,    HM_D,    HM_F,    KC_G,                        KC_H,     HM_J,   HM_K,    HM_L,    HM_M,    KC_ENT,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        KC_LSFT,    KC_W,    KC_X,    KC_C,    KC_V,   KC_B,                        KC_N, KC_COMM,  KC_DOT, KC_QUOT, S(KC_MINS), KC_RSFT,
     //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -100,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_LALT,         S(KC_1), S(KC_SLSH), KC_SCLN, S(KC_SCLN), S(KC_QUOT), KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, KC_LALT,  KC_SPC,    KC_BSPC,  KC_DEL, KC_RALT
+                                          KC_LGUI, _______,  KC_SPC,    KC_BSPC,  KC_DEL, KC_RALT
                                       //`--------------------------'  `--------------------------'
     ),
 
@@ -140,4 +157,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
+
+// ============================================================================
+// CHORDAL HOLD - which half each key belongs to
+// ============================================================================
+// crkbd is 6 cols x 4 rows per half: the first 4 matrix rows are the left half.
+
+char chordal_hold_handedness(keypos_t key) {
+    return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }

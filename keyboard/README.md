@@ -1,110 +1,100 @@
-## ⌨️ Keyboard Layouts
+# Corne (crkbd) — keymap `arn`
 
-### BASE - AZERTY Native
+42-key split. AZERTY letters emitted as US keycodes, so macOS stays on **ABC/US**.
+Three layers, modifiers on the home row.
+
+## Modifiers — home row
+
 ```
-Left Hand                              Right Hand
-┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-│TAB│ A │ Z │ E │ R │ T │            │ Y │ U │ I │ O │ P │DEL│
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│ESC│ Q │ S │ D │ F │ G │            │ H │ J │ K │ L │ M │ENT│
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│SFT│ W │ X │ C │ V │ B │            │ N │ , │ . │ ' │ _ │SFT│
-└───┴───┴───┼───┼───┼───┤            ├───┼───┼───┼───┴───┴───┘
-            │GUI│LOW│SPC│            │BSP│RAI│ALT│
-            └───┴───┴───┘            └───┴───┴───┘
+        q   s   d   f              j   k   l   m
+        ⌘   ⌥   ⌃   ⇧              ⇧   ⌃   ⌥   ⌘
 ```
-**Mac mods**: `GUI` = ⌘ Cmd (left thumb) · `ALT` = ⌥ Option (right thumb)
-**Python direct**: `'` `_` `.` `,` → No LOWER needed! (`:` via LOWER/RAISE)
 
----         
+Tap = the letter. Hold = the modifier. Mirrored, so every modifier exists on both hands.
 
-### LOWER - Symbols + Numpad
+**One rule: opposite hand fires instantly, same hand needs a beat.**
+
+| Combo | How |
+|-------|-----|
+| `⌥ →` word nav | hold `s` (left) + RAISE `l` (right) |
+| `⌥ ⌫` delete word | hold `s` (left) + BSPC (right thumb) |
+| `⌃ a` line start | hold `k` (right) + `a` (left) |
+| `⌘ ⌫` | left thumb ⌘ + BSPC — thumbs are plain mods, no rule applies |
+| `⌥ f` | same hand: hold `s` ~0.2 s *before* `f` |
+
+Typing "de", "sa" or "kl" at speed can never fire a modifier: under 200 ms on the same
+hand, QMK always resolves to the letter (`CHORDAL_HOLD` in `config.h`).
+
+⌘ is still on the left thumb and ⇧ on the outer columns, so ⌘C / ⌘V are unchanged.
+
+## Layers
+
+Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
+
+### BASE
 ```
-Left Hand (Operators)                 Right Hand (Brackets + Numbers)
-┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-│ ~ │ ! │ @ │ # │ $ │ % │            │ ^ │ ( │ ) │ 1 │ 2 │ 3 │
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│CTL│ - │ + │ = │ * │ / │            │ [ │ ] │ " │ 4 │ 5 │ 6 │
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│SFT│ < │ > │ & │ | │ \ │            │ { │ } │ ; │ 7 │ 8 │ 9 │
-└───┴───┴───┼───┼───┼───┤            ├───┼───┼───┼───┴───┴───┘
-            │GUI│///│SPC│            │ 0 │ADJ│ ? │
-            └───┴───┴───┘            └───┴───┴───┘
+┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+│TAB│ A │ Z │ E │ R │ T │   │ Y │ U │ I │ O │ P │DEL│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│ESC│ Q │ S │ D │ F │ G │   │ H │ J │ K │ L │ M │ENT│
+│   │ ⌘ │ ⌥ │ ⌃ │ ⇧ │   │   │   │ ⇧ │ ⌃ │ ⌥ │ ⌘ │   │
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│SFT│ W │ X │ C │ V │ B │   │ N │ , │ . │ ' │ _ │SFT│
+└───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
+            │⌘  │LOW│SPC│   │BSP│RAI│⌥  │
+            └───┴───┴───┘   └───┴───┴───┘
 ```
-**Logic**: All operators left, all brackets right, numpad 789/456/123/0
+`'` `_` `.` `,` are direct, no layer needed.
 
----
-
-### RAISE - Navigation + F-keys
+### LOWER — symbols left, numpad right
 ```
-Left Hand (Page Nav + F-keys)         Right Hand (Arrows HJKL + F-keys)
-┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-│DEL│F1 │F2 │F3 │F4 │F5 │            │F6 │F7 │F8 │F9 │F10│F11│
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│CTL│HOM│PUP│PDN│END│TAB│            │ ← │ ↓ │ ↑ │ → │ENT│F12│
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│SFT│UND│CUT│CPY│PST│   │            │ ! │ ? │ ; │ : │ " │SFT│
-└───┴───┴───┼───┼───┼───┤            ├───┼───┼───┼───┴───┴───┘
-            │GUI│ALT│SPC│            │BSP│DEL│ALT│
-            └───┴───┴───┘            └───┴───┴───┘
+┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+│ ~ │ ! │ @ │ # │ $ │ % │   │ ^ │ ( │ ) │ 1 │ 2 │ 3 │
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│CTL│ - │ + │ = │ * │ / │   │ [ │ ] │ " │ 4 │ 5 │ 6 │
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│SFT│ < │ > │ & │ | │ \ │   │ { │ } │ ; │ 7 │ 8 │ 9 │
+└───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
+            │⌘  │///│SPC│   │ 0 │ADJ│ ? │
+            └───┴───┴───┘   └───┴───┴───┘
 ```
-**Vim arrows**: H=← J=↓ K=↑ L=→ | **Edit**: Undo/Cut/Copy/Paste = Z/X/C/V
-**Word nav**: hold RAISE (right thumb) + ⌥/⌘ (left thumb) + ←/→ (right hand)
 
----
-
-### ADJUST - System Settings
+### RAISE — navigation
 ```
-Left Hand (RGB OFF)                   Right Hand (Media Keys)
-┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-│RST│   │   │   │   │   │            │   │   │   │   │   │   │
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│   │   │   │   │   │   │            │PRV│PLY│NXT│   │   │   │
-├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-│   │   │CAP│   │   │   │            │   │MUT│V- │V+ │   │   │
-└───┴───┴───┼───┼───┼───┤            ├───┼───┼───┼───┴───┴───┘
-            │   │///│   │            │   │///│   │
-            └───┴───┴───┘            └───┴───┴───┘
+┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+│DEL│F1 │F2 │F3 │F4 │F5 │   │F6 │F7 │F8 │F9 │F10│F11│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│CTL│HOM│PUP│PDN│END│TAB│   │ ← │ ↓ │ ↑ │ → │ENT│F12│
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│SFT│UND│CUT│CPY│PST│   │   │ ! │ ? │ ; │ : │ " │SFT│
+└───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
+            │⌘  │LOW│SPC│   │BSP│DEL│⌥  │
+            └───┴───┴───┘   └───┴───┴───┘
 ```
-**Access**: Hold LOWER + RAISE | **Reset**: Top-left for bootloader mode
-**Caps Word**: tap both Shifts (or ADJUST+C) → one word in CAPS, off at space
+Arrows follow vim: `H J K L`. Word nav = home row `⌥` + arrow.
 
----
+### ADJUST — system and media
+```
+┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
+│RST│   │   │   │   │   │   │   │   │   │   │   │   │
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│   │   │   │   │   │   │   │PRV│PLY│NXT│   │   │   │
+├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
+│   │   │   │CAP│   │   │   │   │MUT│V- │V+ │   │   │
+└───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
+```
+`RST` = bootloader. Caps Word: tap both shifts, one word in caps, off at space.
 
-## 🔧 Flashing the keyboard (both halves)
+## Build and flash
 
-**Split** keyboard (Corne / crkbd), Pro Micro, `caterina` bootloader. The **same firmware** is flashed onto each half, one half at a time.
+Same firmware on both halves, one at a time. Bootloader is `caterina`.
 
-### 1. Copy the keymap into the QMK tree (if not done yet)
 ```sh
-# From this repo, into your qmk_firmware clone
-cp keymap.c config.h rules.mk ~/qmk_firmware/keyboards/crkbd/keymaps/arn/
+./sync.sh                            # copy the keymap into ~/qmk_firmware
+qmk compile -kb crkbd/rev1 -km arn   # verify it builds
+qmk flash   -kb crkbd/rev1 -km arn   # then reset the half that is plugged in
 ```
 
-### 2. Compile (make sure it builds before flashing)
-```sh
-qmk compile -kb crkbd -km arn
-```
-
-### 3. Flash the LEFT half
-```sh
-qmk flash -kb crkbd -km arn
-```
-When `qmk` prints **"Detecting caterina bootloader…"**:
-1. Plug in **only** the left half over USB.
-2. Put it in bootloader mode: press **reset** (or double-tap), or use the `RESET`/`QK_BOOT` key on the **ADJUST** layer (top-left).
-3. Flashing starts automatically once the caterina port is detected.
-
-### 4. Flash the RIGHT half
-Run the exact same command, then plug in and reset the right half:
-```sh
-qmk flash -kb crkbd -km arn
-```
-1. Unplug the left, plug in **only** the right half.
-2. Reset / bootloader (same `QK_BOOT` key on the ADJUST layer).
-3. Flashing starts again on its own.
-
-### Notes
-- Firmware is **identical** on both sides: `SPLIT_USB_DETECT` handles master/slave detection automatically.
-- No handedness to set here: this keymap relies on `SPLIT_USB_DETECT` (see `config.h`), so the same `.hex` goes on both halves.
-- If the bootloader isn't detected: quickly double-tap the reset button, or bridge `RST`–`GND` twice.
+At `Detecting caterina bootloader…`, plug in one half alone and hit reset (double-tap,
+or the `RST` key on ADJUST). Repeat for the other half. `SPLIT_USB_DETECT` handles
+master/slave, so there is no handedness to set.

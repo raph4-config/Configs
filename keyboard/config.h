@@ -7,9 +7,14 @@
 // ERGONOMICS SETTINGS
 // ============================================================================
 
-#define TAPPING_TERM 180
+// Home row mods: tap = letter, hold = modifier
+#define TAPPING_TERM 200
 #define PERMISSIVE_HOLD
-#define TAPPING_FORCE_HOLD
+#define QUICK_TAP_TERM 0
+
+// Only allow a hold when the other key is on the OPPOSITE hand.
+// Kills same-hand misfires ("de", "sa", "kl") that make home row mods unusable.
+#define CHORDAL_HOLD
 
 // Caps Word: tap both shifts to UPPERCASE one word, auto-off at space
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
