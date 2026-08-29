@@ -3,11 +3,14 @@
 Two systems side by side:
 
 - **Chrome shortcuts** use `⌘`. They work everywhere, including `chrome://` pages.
-- **Vimium** (installed) uses bare letters. It only works on real web pages: not on
-  `chrome://`, not the Web Store, not the PDF viewer. Fall back to `⌘` there.
+- **[Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)**
+  uses bare letters. It only works on real web pages: not on `chrome://`, not the Web
+  Store, not the PDF viewer. Fall back to `⌘` there.
 
-Prerequisite: System Settings > Keyboard > **Keyboard navigation** ON, otherwise Tab
-only reaches text fields and half the dialogs stay unreachable.
+Two things to switch on once: System Settings > Keyboard > **Keyboard navigation**, so Tab
+reaches buttons and not just text fields; and in the Vimium options, **Smooth scrolling**
+plus **Filter link hints by character**, so `f` matches the link text instead of random
+letters.
 
 ## Open Chrome, switch window
 
