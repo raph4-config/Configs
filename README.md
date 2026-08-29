@@ -9,6 +9,7 @@ Personal macOS dotfiles.
 | `zsh/` | zsh, aliases, oh-my-posh theme |
 | `git/` | git config and aliases |
 | `wezterm/` | WezTerm terminal |
+| `chrome/` | Chrome extensions and Vimium settings |
 | `nvim/` | Neovim (LazyVim) |
 | `keyboard/` | QMK split-keyboard firmware |
 | `espanso/` | Espanso text expansion |
