@@ -62,16 +62,17 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
 ### RAISE — navigation
 ```
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
-│DEL│F1 │F2 │F3 │F4 │F5 │   │F6 │F7 │F8 │F9 │F10│F11│
+│ ` │F1 │F2 │F3 │F4 │F5 │   │F6 │F7 │F8 │F9 │F10│F11│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
 │CTL│HOM│PUP│PDN│END│TAB│   │ ← │ ↓ │ ↑ │ → │ENT│F12│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
-│SFT│UND│CUT│CPY│PST│   │   │ ! │ ? │ ; │ : │ " │SFT│
+│SFT│UND│CUT│CPY│PST│⌘` │   │ ! │ ? │ ; │ : │ " │SFT│
 └───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
             │⌘  │LOW│SPC│   │BSP│DEL│⌥  │
             └───┴───┴───┘   └───┴───┴───┘
 ```
 Arrows follow vim: `H J K L`. Word nav = home row `⌥` + arrow.
+Backtick sits top-left, mirroring `~` on LOWER. `⌘\`` cycles the windows of the front app.
 
 ### ADJUST — system and media
 ```

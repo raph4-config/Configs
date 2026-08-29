@@ -98,24 +98,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *
      * Left Hand (Page Nav + F-keys):      Right Hand (Arrows HJKL + F-keys):
      * ┌─────┬─────┬─────┬─────┬─────┬─────┐  ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     * │ DEL │ F1  │ F2  │ F3  │ F4  │ F5  │  │ F6  │ F7  │ F8  │ F9  │ F10 │ F11 │
+     * │  `  │ F1  │ F2  │ F3  │ F4  │ F5  │  │ F6  │ F7  │ F8  │ F9  │ F10 │ F11 │
      * ├─────┼─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┼─────┤
      * │CTRL │HOME │PG_UP│PG_DN│ END │ TAB │  │  ←  │  ↓  │  ↑  │  →  │ ENT │ F12 │
      * ├─────┼─────┼─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┼─────┼─────┤
-     * │SHIFT│UNDO │ CUT │COPY │PASTE│ ALT │  │  !  │  ?  │  ;  │  :  │  "  │SHIFT│
+     * │SHIFT│UNDO │ CUT │COPY │PASTE│ ⌘`  │  │  !  │  ?  │  ;  │  :  │  "  │SHIFT│
      * └─────┴─────┴─────┼─────┼─────┼─────┤  ├─────┼─────┼─────┼─────┴─────┴─────┘
      *                   │ GUI │ ALT │ SPC │  │ BSP │ DEL │ ALT │
      *                   └─────┴─────┴─────┘  └─────┴─────┴─────┘
      *
-     * Word nav: hold RAISE (right thumb) + ALT/GUI (left thumb) + ←/→ (right hand)
+     * Backtick top-left, mirroring ~ on LOWER. Cmd+` cycles app windows.
      */
     [_RAISE] = LAYOUT(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_DEL,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
+       KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL, KC_HOME, KC_PGUP, KC_PGDN,  KC_END,  KC_TAB,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,  KC_ENT,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_LALT,         S(KC_1), S(KC_SLSH), KC_SCLN, S(KC_SCLN), S(KC_QUOT), KC_RSFT,
+      KC_LSFT, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_GRV),    S(KC_1), S(KC_SLSH), KC_SCLN, S(KC_SCLN), S(KC_QUOT), KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI, _______,  KC_SPC,    KC_BSPC,  KC_DEL, KC_RALT
                                       //`--------------------------'  `--------------------------'
