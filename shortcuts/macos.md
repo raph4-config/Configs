@@ -22,30 +22,6 @@
 | Close window / Quit app | `⌘ + W` / `⌘ + Q` |
 | Fullscreen | `⌃ + ⌘ + F` |
 
-## AeroSpace (tiling)
-Modificateur : `⌥` alt. Focus en `hjkl` (les `⌥ + ←/→` restent la navigation texte macOS).
-
-| Action | Key |
-|--------|-----|
-| Focus fenêtre | `⌥ + H / J / K / L` |
-| Déplacer la fenêtre | `⌥ + ⇧ + H / J / K / L` |
-| Workspace 1..9 | `⌥ + 1..9` |
-| Envoyer la fenêtre au workspace | `⌥ + ⇧ + 1..9` |
-| Workspace précédent | `⌥ + Tab` |
-| Workspace vers l'autre écran | `⌥ + ⇧ + Tab` |
-| Redimensionner | `⌥ + - / =` |
-| Équilibrer les tailles | `⌥ + ⇧ + =` |
-| Fullscreen | `⌥ + F` |
-| Layout tiles h/v | `⌥ + /` |
-| Layout accordion h/v | `⌥ + ,` |
-| Flottant <-> tuilé | `⌥ + ⇧ + Espace` |
-| Ouvrir / focus WezTerm | `⌥ + Entrée` |
-| Grouper avec la voisine | `⌥ + ⇧ + Entrée` puis `h/j/k/l` |
-| Mode service | `⌥ + ⇧ + ;` |
-
-Mode service : `esc` recharge la config, `r` remet l'arbre à plat, `f` bascule flottant,
-`⌫` ferme toutes les autres fenêtres.
-
 ## Spaces / Mission Control
 | Action | Key |
 |--------|-----|

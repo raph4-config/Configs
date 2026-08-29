@@ -9,7 +9,6 @@ Personal macOS dotfiles.
 | `zsh/` | zsh, aliases, oh-my-posh theme |
 | `git/` | git config and aliases |
 | `wezterm/` | WezTerm terminal |
-| `aerospace/` | AeroSpace tiling window manager |
 | `nvim/` | Neovim (LazyVim) |
 | `keyboard/` | QMK split-keyboard firmware |
 | `espanso/` | Espanso text expansion |
@@ -32,17 +31,3 @@ manual step, because `~/.claude/settings.json` is not synced:
 
 Requires `jq`. Shows model, effort, worktree and PR, plus a context bar that turns yellow at 50%
 and red at 80%, with cost, session duration and the 5-hour quota.
-
-### AeroSpace
-
-```sh
-brew install --cask --appdir="$HOME/Applications" nikitabobko/tap/aerospace
-```
-
-`--appdir` is required: this account is not in the `admin` group, so a plain cask install fails
-trying to `sudo` into `/Applications`. The app lands in `~/Applications`, the `aerospace` CLI in
-`/opt/homebrew/bin`.
-
-`sync.sh` copies `aerospace/aerospace.toml` to `~/.config/aerospace/`. First launch asks for
-Accessibility permission (System Settings > Privacy & Security > Accessibility). Shortcuts:
-[`shortcuts/macos.md`](shortcuts/macos.md).
