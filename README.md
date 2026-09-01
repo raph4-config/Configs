@@ -44,5 +44,5 @@ trying to `sudo` into `/Applications`. The app lands in `~/Applications`, the `a
 `/opt/homebrew/bin`.
 
 `sync.sh` copies `aerospace/aerospace.toml` to `~/.config/aerospace/`. First launch asks for
-Accessibility permission (System Settings > Privacy & Security > Accessibility). Shortcuts:
-[`shortcuts/macos.md`](shortcuts/macos.md).
+Accessibility permission (System Settings > Privacy & Security > Accessibility). Keys, CLI and
+per-app rules: [`aerospace/README.md`](aerospace/README.md).
