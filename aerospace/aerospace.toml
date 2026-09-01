@@ -4,6 +4,9 @@
 # alt + ctrl + hjkl = ecrans
 # Doc : https://nikitabobko.github.io/AeroSpace/guide
 
+# Version du format de config (le warning au reload vient de la v1)
+config-version = 2
+
 start-at-login = true
 
 # Normalisation de l'arbre : evite les conteneurs imbriques inutiles
