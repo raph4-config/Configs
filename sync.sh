@@ -18,18 +18,6 @@ echo "✅ Git"
 cp ~/raph_config/wezterm/.wezterm.lua ~/.wezterm.lua
 echo "✅ WezTerm"
 
-# ─── AEROSPACE ──────────────────────────────────────────────
-if [ -d "$HOME/Applications/AeroSpace.app" ] || [ -d "/Applications/AeroSpace.app" ]; then
-    mkdir -p ~/.config/aerospace
-    cp ~/raph_config/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
-    if command -v aerospace &>/dev/null && aerospace list-workspaces --focused &>/dev/null; then
-        aerospace reload-config &>/dev/null
-    fi
-    echo "✅ AeroSpace"
-else
-    echo "⚠️  AeroSpace not installed, skipped"
-fi
-
 # ─── NEOVIM ─────────────────────────────────────────────────
 cp -r ~/raph_config/nvim/* ~/.config/nvim/
 echo "✅ Neovim"
