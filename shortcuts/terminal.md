@@ -3,7 +3,7 @@
 ## zsh line editing (the big mouse-saver)
 | Action | Key |
 |--------|-----|
-| Search history | `⌃ + R` (type, `⌃ + R` again = older) |
+| Search history (fzf, fuzzy) | `⌃ + R` (type, arrows to pick) |
 | Start / end of line | `⌃ + A` / `⌃ + E` |
 | Word back / forward | `⌥ + B` / `⌥ + F` |
 | Delete word back / to start / to end | `⌃ + W` / `⌃ + U` / `⌃ + K` |
@@ -40,6 +40,17 @@
 | Split top / bottom | `⌘ + ⇧ + D` |
 | Close pane | `⌘ + W` |
 | Move between panes | `⌘ + ⌥ + ← / → / ↑ / ↓` |
+
+## Navigation (zoxide + fzf)
+| Command | Example | Does |
+|---------|---------|------|
+| `z <chunk>` | `z raph` → `~/raph_config` | jump to the best-ranked match |
+| `z <a> <b>` | `z conf key` → `~/raph_config/keyboard` | match several chunks of the path |
+| `zi` | `zi conf` | interactive picker when `z` guesses wrong |
+| `⌃ + T` | `nvim` then `⌃ + T` | insert a file path into the current command |
+| `⌥ + C` | | cd into a subdirectory, fuzzy |
+
+Ranking is frecency (frequency + recency): it self-corrects after a few days of real use.
 
 ## My aliases
 | Alias | Does |
