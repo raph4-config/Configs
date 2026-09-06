@@ -23,14 +23,10 @@ Shell config: oh-my-posh prompt, autosuggestions, syntax highlighting, completio
 | `confposh` | edit oh-my-posh theme |
 | `confvim` | edit nvim config |
 
-## Search & find
+## Search, listing, navigation
 
-| Alias | Action |
-|-------|--------|
-| `ff` | find file by name (case-insensitive), skips `venv`/`.git`/`node_modules` |
-| `fls` | find file by exact name, same excludes |
-| `fgrep` | recursive grep, excludes `.git`/`venv`/`node_modules` |
-| `hgrep` | grep shell history |
+Provided by the modern CLI tools (`ff`, `fgrep`, `ls`, `ll`, `lt`, `cat`, `z`, `zi`, fzf keys):
+see [`../cli/README.md`](../cli/README.md).
 
 ## Python & Poetry
 
