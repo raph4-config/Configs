@@ -28,10 +28,9 @@ alias confposh='nvim ~/.config/oh-my-posh/zash.omp.json'
 alias confvim='nvim ~/.config/nvim'
 
 # ─── 🔍 SEARCH & FIND ───────────────────────────────────────
-alias ff='find . -type f \( -path "./venv" -o -path "./.git" -o -path "./node_modules" \) -prune -false -o -iname'
-alias fls='find . -type f \( -path "./venv" -o -path "./.git" -o -path "./node_modules" \) -prune -false -o -name'
-alias fgrep='grep -rni --exclude-dir={.git,venv,node_modules}'
-alias hgrep='history | grep'
+# fd et rg respectent .gitignore : plus besoin d'exclure venv/.git/node_modules a la main
+alias ff='fd'                    # ff <nom>     fichier par nom
+alias fgrep='rg'                 # fgrep <txt>  recherche dans le contenu
 
 # ─── 🧭 NAVIGATION ──────────────────────────────────────────
 # zoxide: apprend les dossiers visites, `z raph` saute dans ~/raph_config
@@ -39,6 +38,13 @@ eval "$(zoxide init zsh)"
 
 # fzf: Ctrl+R historique, Ctrl+T fichiers, Alt+C cd dans un sous-dossier
 eval "$(fzf --zsh)"
+
+# ─── 🧰 MODERN CLI ──────────────────────────────────────────
+alias ls='eza --group-directories-first'
+alias ll='eza -lah --git --group-directories-first'
+alias lt='eza --tree --level=2 --group-directories-first'
+alias cat='bat -pp'              # plain, sans pager ; `bat <f>` pour la vue complete
+export BAT_THEME="TwoDark"
 
 # ─── 🐍 PYTHON & POETRY ─────────────────────────────────────
 alias po='poetry'
