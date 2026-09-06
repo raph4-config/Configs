@@ -55,6 +55,23 @@ else
     echo "⚠️  QMK keymap dir not found, skipped"
 fi
 
+# ─── ZOXIDE ─────────────────────────────────────────────────
+# seed the database on a fresh machine; skipped once it has entries
+if command -v zoxide &>/dev/null; then
+    if [ "$(zoxide query -l 2>/dev/null | wc -l | tr -d ' ')" -eq 0 ]; then
+        find ~ -maxdepth 1 -type d ! -name ".*" ! -name "Library" -exec zoxide add {} \; 2>/dev/null
+        if command -v fd &>/dev/null; then
+            fd -H -t d -d 4 '^\.git$' ~ -E Library -E node_modules -x dirname 2>/dev/null |
+                while read -r repo; do zoxide add "$repo"; done
+        fi
+        echo "✅ Zoxide (database seeded)"
+    else
+        echo "✅ Zoxide (database already populated)"
+    fi
+else
+    echo "⚠️  Zoxide not installed, skipped"
+fi
+
 # ─── RELOAD ZSH ─────────────────────────────────────────────
 source ~/.zshrc
 echo ""

@@ -33,6 +33,13 @@ alias fls='find . -type f \( -path "./venv" -o -path "./.git" -o -path "./node_m
 alias fgrep='grep -rni --exclude-dir={.git,venv,node_modules}'
 alias hgrep='history | grep'
 
+# ─── 🧭 NAVIGATION ──────────────────────────────────────────
+# zoxide: apprend les dossiers visites, `z raph` saute dans ~/raph_config
+eval "$(zoxide init zsh)"
+
+# fzf: Ctrl+R historique, Ctrl+T fichiers, Alt+C cd dans un sous-dossier
+eval "$(fzf --zsh)"
+
 # ─── 🐍 PYTHON & POETRY ─────────────────────────────────────
 alias po='poetry'
 alias test='poetry run pytest'
