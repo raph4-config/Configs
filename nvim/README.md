@@ -14,8 +14,8 @@ For the long-form guide (vim grammar, modes, learning path), see [`../CHEATSHEET
 | `lua/config/` | `lazy.lua`, `options.lua`, `keymaps.lua`, `autocmds.lua` |
 | `lua/plugins/` | plugin specs |
 
-Plugins: `tokyonight.nvim` (colorscheme, transparent), `neo-tree.nvim`, `indent-blankline.nvim`,
-`Comment.nvim`, and the LazyVim Python extra.
+Plugins: `tokyonight.nvim` (colorscheme, transparent), snacks explorer (neo-tree is disabled),
+`indent-blankline.nvim`, `Comment.nvim`, and the LazyVim Python extra.
 
 ## Files and search
 
@@ -82,6 +82,8 @@ Plugins: `tokyonight.nvim` (colorscheme, transparent), `neo-tree.nvim`, `indent-
 | `<` / `>` in visual | indent and keep the selection, so it can be repeated |
 | `<leader>p` in visual | paste over a selection without losing the yank |
 | `scrolloff = 8` | always keep 8 lines of context around the cursor |
+| `<leader>e` | focus the explorer, never closes it |
+| explorer at startup | opened by `autocmds.lua`, focus handed back to the code |
 
 ## Tasks
 
