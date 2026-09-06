@@ -36,7 +36,7 @@
 	cob = checkout -b              # g cob new_branch_name
 
 	# push
-	psb = push -u origin           # g psb name_branche  (ou g psb seul pour la branche courante)
+	psb = push -u origin           # g psb branch_name  (or g psb alone for the current branch)
 	pf = push --force-with-lease
 
 	# log

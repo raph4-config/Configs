@@ -9,8 +9,8 @@
 --
 vim.schedule(function()
   Snacks.explorer.open({
-    -- on_show : le picker prend le focus de maniere asynchrone, on ne peut
-    -- rendre la main au code qu'une fois qu'il est affiche.
+    -- on_show: the picker takes focus asynchronously, so the code can only get
+    -- it back once the picker is actually shown.
     on_show = function()
       vim.schedule(function()
         vim.cmd("wincmd p")

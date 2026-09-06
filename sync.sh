@@ -41,7 +41,7 @@ mkdir -p ~/.claude/skills
 rsync -a --delete ~/raph_config/claude/skills/ ~/.claude/skills/
 echo "✅ Claude Code skills ($(ls -1 ~/.claude/skills | tr '\n' ' '))"
 
-# statusline: l'entree "statusLine" de ~/.claude/settings.json n'est pas syncee
+# statusline: the "statusLine" entry in ~/.claude/settings.json is not synced
 cp ~/raph_config/claude/statusline.sh ~/.claude/statusline.sh
 chmod +x ~/.claude/statusline.sh
 echo "✅ Claude Code statusline"
