@@ -29,4 +29,11 @@ config.keys = {
   { key = 'DownArrow',  mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
 }
 
+-- Fullscreen at launch: no config option does this, the gui-startup hook is required
+local mux = wezterm.mux
+wezterm.on('gui-startup', function(cmd)
+  local _, _, window = mux.spawn_window(cmd or {})
+  window:gui_window():toggle_fullscreen()
+end)
+
 return config
