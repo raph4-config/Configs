@@ -29,21 +29,25 @@ local EXPLORER_MIN_MIN_COLS = 120
 vim.api.nvim_create_autocmd("VimResized", {
   desc = "Hide the explorer when the window gets narrow",
   callback = function()
-    local explorer = Snacks.picker.get({ source = "explorer" })[1]
-    local open = explorer and not explorer.closed
+    -- Deferred on purpose: snacks re-lays out its open pickers on this same
+    -- VimResized event, and closing one from under it crashes init_layout.
+    vim.schedule(function()
+      local explorer = Snacks.picker.get({ source = "explorer" })[1]
+      local open = explorer and not explorer.closed
 
-    if vim.o.columns < EXPLORER_MIN_MIN_COLS then
-      if open then
-        explorer:close()
+      if vim.o.columns < EXPLORER_MIN_MIN_COLS then
+        if open then
+          explorer:close()
+        end
+      elseif not open then
+        Snacks.explorer.open({
+          on_show = function()
+            vim.schedule(function()
+              vim.cmd("wincmd p")
+            end)
+          end,
+        })
       end
-    elseif not open then
-      Snacks.explorer.open({
-        on_show = function()
-          vim.schedule(function()
-            vim.cmd("wincmd p")
-          end)
-        end,
-      })
-    end
+    end)
   end,
 })
