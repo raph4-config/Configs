@@ -8,6 +8,12 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 --
 vim.schedule(function()
+  -- snacks already opens the explorer when nvim starts on a directory; opening it
+  -- again would toggle it closed.
+  local existing = Snacks.picker.get({ source = "explorer" })[1]
+  if existing and not existing.closed then
+    return
+  end
   Snacks.explorer.open({
     -- on_show: the picker takes focus asynchronously, so the code can only get
     -- it back once the picker is actually shown.
