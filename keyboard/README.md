@@ -5,7 +5,7 @@ Three layers, modifiers on the home row.
 
 ## Modifiers — home row
 
-```
+```text
         q   s   d   f              j   k   l   m
         ⌘   ⌥   ⌃   ⇧              ⇧   ⌃   ⌥   ⌘
 ```
@@ -14,13 +14,13 @@ Tap = the letter. Hold = the modifier. Mirrored, so every modifier exists on bot
 
 **One rule: opposite hand fires instantly, same hand needs a beat.**
 
-| Combo | How |
-|-------|-----|
-| `⌥ →` word nav | hold `s` (left) + RAISE `l` (right) |
-| `⌥ ⌫` delete word | hold `s` (left) + BSPC (right thumb) |
-| `⌃ a` line start | hold `k` (right) + `a` (left) |
-| `⌘ ⌫` | left thumb ⌘ + BSPC — thumbs are plain mods, no rule applies |
-| `⌥ f` | same hand: hold `s` ~0.2 s *before* `f` |
+| Combo             | How                                                          |
+| ----------------- | ------------------------------------------------------------ |
+| `⌥ →` word nav    | hold `s` (left) + RAISE `l` (right)                          |
+| `⌥ ⌫` delete word | hold `s` (left) + BSPC (right thumb)                         |
+| `⌃ a` line start  | hold `k` (right) + `a` (left)                                |
+| `⌘ ⌫`             | left thumb ⌘ + BSPC — thumbs are plain mods, no rule applies |
+| `⌥ f`             | same hand: hold `s` ~0.2 s _before_ `f`                      |
 
 Typing "de", "sa" or "kl" at speed can never fire a modifier: under 200 ms on the same
 hand, QMK always resolves to the letter (`CHORDAL_HOLD` in `config.h`).
@@ -32,7 +32,8 @@ hand, QMK always resolves to the letter (`CHORDAL_HOLD` in `config.h`).
 Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
 
 ### BASE
-```
+
+```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │TAB│ A │ Z │ E │ R │ T │   │ Y │ U │ I │ O │ P │DEL│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
@@ -44,10 +45,12 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
             │⌘  │LOW│SPC│   │BSP│RAI│⌥  │
             └───┴───┴───┘   └───┴───┴───┘
 ```
+
 `'` `_` `.` `,` are direct, no layer needed.
 
 ### LOWER — symbols left, numpad right
-```
+
+```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │ ~ │ ! │ @ │ # │ $ │ % │   │ ^ │ ( │ ) │ 1 │ 2 │ 3 │
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
@@ -60,7 +63,8 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
 ```
 
 ### RAISE — navigation
-```
+
+```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │ ` │F1 │F2 │F3 │F4 │F5 │   │F6 │F7 │F8 │F9 │F10│F11│
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
@@ -71,11 +75,13 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
             │⌘  │LOW│SPC│   │BSP│DEL│⌥  │
             └───┴───┴───┘   └───┴───┴───┘
 ```
+
 Arrows follow vim: `H J K L`. Word nav = home row `⌥` + arrow.
 Backtick sits top-left, mirroring `~` on LOWER. `⌘\`` cycles the windows of the front app.
 
 ### ADJUST — system and media
-```
+
+```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
 │RST│   │   │   │   │   │   │   │   │   │   │   │   │
 ├───┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───┤
@@ -84,6 +90,7 @@ Backtick sits top-left, mirroring `~` on LOWER. `⌘\`` cycles the windows of th
 │   │   │   │CAP│   │   │   │   │MUT│V- │V+ │   │   │
 └───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
 ```
+
 `RST` = bootloader. Caps Word: tap both shifts, one word in caps, off at space.
 
 ## Build and flash

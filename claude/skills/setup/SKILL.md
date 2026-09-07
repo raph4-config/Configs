@@ -20,6 +20,7 @@ Before writing anything, understand the codebase:
 ### 2. Generate CLAUDE.md
 
 Write a CLAUDE.md at the project root. It must be:
+
 - In English
 - Concise, no padding, no filler sentences
 - Written for a developer who will use Claude Code on this project
@@ -27,7 +28,7 @@ Write a CLAUDE.md at the project root. It must be:
 
 **Required sections** (include only sections that have real content):
 
-```
+```text
 # Project Name
 
 One-line description of what this project does.
@@ -59,6 +60,7 @@ Any non-obvious conventions: naming rules, branch strategy, commit format, code 
 ```
 
 Rules:
+
 - Skip any section where you have nothing meaningful to say
 - Do not invent information, only write what you can verify from the code
 - Do not add sections like "Contributing", "License", "Changelog" unless the project explicitly has them
@@ -105,5 +107,6 @@ If a `.claude/settings.json` already exists, merge the deny list rather than ove
 ### 4. Confirm
 
 After creating both files, print a brief summary:
+
 - What was written in CLAUDE.md (sections included)
 - That `.claude/settings.json` was created/updated with credential file protections
