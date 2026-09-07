@@ -27,6 +27,11 @@ config.keys = {
   { key = 'RightArrow', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
   { key = 'UpArrow',    mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
   { key = 'DownArrow',  mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
+  -- same moves, vim style
+  { key = 'h', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Left' },
+  { key = 'l', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
+  { key = 'k', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
+  { key = 'j', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
 }
 
 -- Fullscreen at launch: no config option does this, the gui-startup hook is required
