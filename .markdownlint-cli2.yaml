@@ -1,0 +1,9 @@
+# Rules turned off for this repo, with the reason.
+config:
+  # line-length: cheat-sheet tables are wide by nature, and prettier already
+  # decides where lines break.
+  MD013: false
+  # single-title: CHEATSHEET.md is split into several top-level sections on purpose.
+  MD025: false
+  # first-line-heading: skill files start with YAML frontmatter, not a heading.
+  MD041: false
