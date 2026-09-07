@@ -8,7 +8,6 @@
 | Symbole | Sens |
 |---------|------|
 | ✅ | Déjà natif (Vim ou LazyVim), rien à faire |
-| 🆕 | **Ajout proposé** (à valider avant implémentation) |
 | `<leader>` | La touche `Espace` |
 | `N` / `I` / `V` / `T` | Mode **N**ormal / **I**nsert / **V**isuel / **T**erminal |
 
@@ -193,32 +192,3 @@
 | `:q` / `:qa` | command | Quitter la fenêtre / tout ✅ |
 | `:wq` ou `ZZ` | N | Sauver et quitter ✅ |
 | `:q!` ou `ZQ` | N | Quitter sans sauver ✅ |
-
----
-
-# 🆕 Ajouts proposés (à valider)
-
-Rien ci-dessous n'est encore actif. Ce sont des **micro-confort**, ils ne changent pas tes habitudes (mêmes touches, comportement plus agréable). Tu me dis lesquels tu gardes.
-
-### Fichier : `nvim/lua/config/keymaps.lua`
-
-| Touche | Mode | Ce que ça fait | Pourquoi |
-|--------|:----:|----------------|----------|
-| `n` / `N` | N | Va au résultat **et recentre l'écran** (`nzzzv`) | Le match arrive au milieu, pas collé en bas |
-| `Ctrl-d` / `Ctrl-u` | N | Demi-page **et recentre** (`zz`) | Le curseur ne dérive plus en haut/bas |
-| `<` / `>` | V | Indente **en gardant la sélection** (`<gv`) | Ré-indenter en boucle sans re-sélectionner |
-| `<leader>p` | V | Colle par-dessus **sans écraser** le presse-papier (`"_dP`) | Coller la même chose plusieurs fois |
-
-### Fichier : `nvim/lua/config/options.lua`
-
-| Option | Valeur | Pourquoi |
-|--------|--------|----------|
-| `scrolloff` | `8` | Garde toujours 8 lignes de contexte autour du curseur (au lieu de coller aux bords) |
-
-### Extra LazyVim à activer (optionnel, via `:LazyExtras`)
-
-| Extra | Apporte |
-|-------|---------|
-| `editor.grug-far` | `<leader>sr` : chercher/remplacer dans **tout le projet** avec aperçu |
-
-> Valide en répondant simplement : « tout », « rien », ou la liste de ceux que tu veux.

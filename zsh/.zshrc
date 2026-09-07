@@ -3,7 +3,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/zash.omp.json)"
 
 # ─── HOMEBREW ───────────────────────────────────────────────
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-# ce compte n'est pas admin : les casks vont dans ~/Applications, sinon brew tente un sudo
+# this account is not admin: casks go to ~/Applications, otherwise brew asks for sudo
 export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 # ─── 🛠️ LOCAL BIN ───────────────────────────────────────────
@@ -28,10 +28,23 @@ alias confposh='nvim ~/.config/oh-my-posh/zash.omp.json'
 alias confvim='nvim ~/.config/nvim'
 
 # ─── 🔍 SEARCH & FIND ───────────────────────────────────────
-alias ff='find . -type f \( -path "./venv" -o -path "./.git" -o -path "./node_modules" \) -prune -false -o -iname'
-alias fls='find . -type f \( -path "./venv" -o -path "./.git" -o -path "./node_modules" \) -prune -false -o -name'
-alias fgrep='grep -rni --exclude-dir={.git,venv,node_modules}'
-alias hgrep='history | grep'
+# fd and rg read .gitignore, so no manual venv/.git/node_modules excludes
+alias ff='fd'                    # ff <name>    file by name
+alias fgrep='rg'                 # fgrep <txt>  search file contents
+
+# ─── 🧭 NAVIGATION ──────────────────────────────────────────
+# zoxide: learns the directories you visit, `z raph` jumps to ~/raph_config
+eval "$(zoxide init zsh)"
+
+# fzf: Ctrl+R history, Ctrl+T file paths, Alt+C cd into a subdirectory
+eval "$(fzf --zsh)"
+
+# ─── 🧰 MODERN CLI ──────────────────────────────────────────
+alias ls='eza --group-directories-first'
+alias ll='eza -lah --git --group-directories-first'
+alias lt='eza --tree --level=2 --group-directories-first'
+alias cat='bat -pp'              # plain, no pager; `bat <f>` for the full view
+export BAT_THEME="TwoDark"
 
 # ─── 🐍 PYTHON & POETRY ─────────────────────────────────────
 alias po='poetry'
@@ -162,22 +175,22 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 
 # ─── 🔮 AUTOCOMPLETION ──────────────────────────────────────
-# Autosuggestions (suggestions en gris basées sur l'historique)
+# Autosuggestions (grey hints from history)
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Syntax highlighting (commandes en vert/rouge)
+# Syntax highlighting (commands in green/red)
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Completions avancées
+# Extra completions
 fpath[1,0]=$(brew --prefix)/share/zsh-completions
 
 ZSH_DISABLE_COMPFIX=true
-# Active le système de completion
+# Enable the completion system
 autoload -Uz compinit && compinit -u
 
-# Menu de sélection avec Tab
+# Selection menu on Tab
 zstyle ':completion:*' menu select
-# Completion insensible à la casse
+# Case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 alias fz='open /Applications/FileZilla.app'
 
