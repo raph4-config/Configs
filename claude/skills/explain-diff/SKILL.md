@@ -18,6 +18,7 @@ If empty, explain the current branch instead: `git diff $(git merge-base HEAD or
 The active `gh` account may not have access to the target repo. `arn_ibf` is an Enterprise Managed User and cannot read personal repos, `raph4-config` cannot read iBanFirst ones.
 
 If a `gh` call fails with an authorization error:
+
 1. `gh auth status` to see the configured accounts
 2. `gh auth switch --user <the other account>`
 3. retry the call
@@ -35,6 +36,7 @@ gh pr diff <target>
 Read the actual diff, not just the file list. On a large diff, focus on source changes and skip lockfiles, generated code, and snapshots, then say what you skipped.
 
 A diff alone is not enough to understand the code. You also need the surrounding source, so:
+
 - open the changed files around the hunks, to see the functions the diff sits in
 - find the callers of anything whose signature or behavior changed (`grep` the symbol), to know what else is affected
 - check whether tests cover the changed path
@@ -71,11 +73,13 @@ In English, three sections, nothing else:
 
 ```markdown
 ## Summary
+
 <what the PR changes, at the intent level, 1 to 3 short lines. Then, if the PR touches a
 list of things (options, endpoints, files, flags), put that list on its own line below
 instead of cramming it into the sentence.>
 
 ## How
+
 <the mechanism. Follow the main path end to end: what triggers the new code, what it does,
 what it returns or writes. Name the key function or module. Explain the non-obvious parts,
 an unusual data structure, a retry, a lock, a fallback.
@@ -84,6 +88,7 @@ Prose if it is one path, 2 to 5 lines. A numbered list if the change lands in se
 distinct places, one entry each, so the reader sees the shape at a glance.>
 
 ## Review points
+
 <one numbered block per point, most important first. Never a flat bullet list of long
 sentences. Each block is:
 
@@ -96,6 +101,7 @@ Leave a blank line between blocks. Write "Nothing notable" if it is clean.>
 
 Emoji are severity markers on those bold claim lines, not decoration. Use exactly this set,
 and nothing else:
+
 - 🔴 it can break: correctness bug, security hole, data loss, race
 - 🟠 blast radius: behavior change for existing users, unchanged caller, breaking API or schema
 - 🟡 worth a second opinion: hardcoded value, new dependency, missing coverage, chosen tradeoff
@@ -105,6 +111,7 @@ Skip the emoji entirely on a short PR with one or two points, where they add noi
 structure.
 
 What belongs in Review points:
+
 - Logic that can break: unhandled edge case, wrong boundary, silent failure, race
 - Blast radius: a caller left unchanged, a behavior change for existing users, a breaking API or schema change
 - Missing coverage: a new path no test exercises
@@ -116,6 +123,7 @@ What does not belong: formatting, naming taste, anything the linter catches, and
 Separate what you verified from what you suspect. "`parse_amount` is called in 3 other places and none were updated" is useful, "there might be other callers" is noise, so go check.
 
 Rules:
+
 - Do not walk through the files one by one, the Files changed tab already does that
 - Do not restate the diff, explain intent and consequence
 - Name a file or symbol only when it matters to the point being made
@@ -125,11 +133,14 @@ Rules:
 - Emoji only as the severity markers above, never inside a sentence
 
 **Example:**
+
 ```markdown
 ## Summary
+
 Caches quote responses in Redis with a 60s TTL, to absorb repeated calls from the front end.
 
 ## How
+
 A `@cached` decorator wraps the `/quotes` handler. The cache key combines the currency pair
 and the rounded amount, so near-identical requests share an entry. A miss falls through to
 the existing pricing call unchanged.

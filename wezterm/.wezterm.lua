@@ -27,6 +27,18 @@ config.keys = {
   { key = 'RightArrow', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
   { key = 'UpArrow',    mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
   { key = 'DownArrow',  mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
+  -- same moves, vim style
+  { key = 'h', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Left' },
+  { key = 'l', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
+  { key = 'k', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
+  { key = 'j', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
 }
+
+-- Fullscreen at launch: no config option does this, the gui-startup hook is required
+local mux = wezterm.mux
+wezterm.on('gui-startup', function(cmd)
+  local _, _, window = mux.spawn_window(cmd or {})
+  window:gui_window():toggle_fullscreen()
+end)
 
 return config

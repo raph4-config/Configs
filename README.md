@@ -4,17 +4,17 @@ Personal macOS dotfiles.
 
 ## Contents
 
-| Dir | Config |
-|-----|--------|
-| `zsh/` | zsh, aliases, oh-my-posh theme |
-| `git/` | git config and aliases |
-| `wezterm/` | WezTerm terminal |
-| `nvim/` | Neovim (LazyVim) |
-| `keyboard/` | QMK split-keyboard firmware |
-| `espanso/` | Espanso text expansion |
-| `claude/` | Claude Code skills and status line |
-| `cli/` | modern CLI tools (eza, bat, fd, rg, dust, delta, fzf, zoxide) |
-| `shortcuts/` | cheat-sheets for things with no config here (macOS, Chrome) |
+| Dir          | Config                                                        |
+| ------------ | ------------------------------------------------------------- |
+| `zsh/`       | zsh, aliases, oh-my-posh theme                                |
+| `git/`       | git config and aliases                                        |
+| `wezterm/`   | WezTerm terminal                                              |
+| `nvim/`      | Neovim (LazyVim)                                              |
+| `keyboard/`  | QMK split-keyboard firmware                                   |
+| `espanso/`   | Espanso text expansion                                        |
+| `claude/`    | Claude Code skills and status line                            |
+| `cli/`       | modern CLI tools (eza, bat, fd, rg, dust, delta, fzf, zoxide) |
+| `shortcuts/` | cheat-sheets for things with no config here (macOS, Chrome)   |
 
 ## Install
 
