@@ -51,3 +51,47 @@ vim.api.nvim_create_autocmd("VimResized", {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  desc = "Auto-save the current file once it stops changing",
+  callback = function(ev)
+    local buf = ev.buf
+    -- Only real files: skip terminals, quickfix, help, and unnamed buffers.
+    if vim.bo[buf].buftype ~= "" then
+      return
+    end
+    if not vim.bo[buf].modifiable or vim.bo[buf].readonly then
+      return
+    end
+    if not vim.bo[buf].modified or vim.api.nvim_buf_get_name(buf) == "" then
+      return
+    end
+    vim.api.nvim_buf_call(buf, function()
+      -- noautocmd on purpose: a plain write would run format-on-save on every
+      -- pause and reshuffle the code under the cursor. An explicit <C-s> still
+      -- formats.
+      vim.cmd("silent! noautocmd write")
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+  desc = "Rebuild the global statusline a resize left blank",
+  callback = function()
+    -- noice externalises the cmdline, so neovim drops 'cmdheight' to 0 and the
+    -- global statusline of laststatus=3 ends up sharing the last screen row
+    -- with it. A resize (a wezterm Cmd+D split) leaves that row unassigned and
+    -- the bar just vanishes. Only a *second* resize ever brought it back, which
+    -- is why moving to the other display seemed to fix it: the two screens have
+    -- different DPI, so crossing them resizes the terminal again.
+    -- Redrawing is not enough, the row has to be re-assigned: toggling
+    -- laststatus tears the global statusline down and rebuilds it.
+    -- Deferred past the resize itself, which is still settling the layout.
+    vim.defer_fn(function()
+      if vim.o.laststatus == 3 then
+        vim.o.laststatus = 2
+        vim.o.laststatus = 3
+      end
+    end, 50)
+  end,
+})
