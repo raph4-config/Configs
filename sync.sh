@@ -14,6 +14,15 @@ echo "✅ Oh My Posh theme"
 cp ~/raph_config/git/.gitconfig ~/.gitconfig
 echo "✅ Git"
 
+# ─── TASKWARRIOR ────────────────────────────────────────────
+cp ~/raph_config/taskwarrior/.taskrc ~/.taskrc
+echo "✅ taskwarrior"
+
+# ─── DIRENV ─────────────────────────────────────────────────
+mkdir -p ~/.config/direnv
+cp ~/raph_config/direnv/direnv.toml ~/.config/direnv/direnv.toml
+echo "✅ direnv"
+
 # ─── WEZTERM ────────────────────────────────────────────────
 cp ~/raph_config/wezterm/.wezterm.lua ~/.wezterm.lua
 echo "✅ WezTerm"

@@ -1,0 +1,9 @@
+# ─── LOGS ───────────────────────────────────────────────────
+# log_filter is a whitelist, not a blacklist: only messages matching the regexp
+# are printed. "error" silences the "loading .envrc" and "export +FOO" lines
+# that fire on every cd, while keeping ".envrc is blocked", the one that says an
+# .envrc was never approved or changed since it was.
+# Do not use log_format = "-" as the man page suggests: it is broken in 2.37
+# and prints "%!!(MISSING)" garbage instead of nothing.
+[global]
+log_filter = "error"
