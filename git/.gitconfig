@@ -63,3 +63,10 @@
 	# remote
 	pl = pull
 	f = fetch --all --prune
+
+# ─── PERSONAL IDENTITY ──────────────────────────────────────
+# Overrides the [user] above on repos whose remote uses the github-perso alias.
+# Pattern must be `:*/**`: after the `:`, a bare `**` degrades to `*` and stops
+# at the `/` of owner/repo.
+[includeIf "hasconfig:remote.*.url:git@github-perso:*/**"]
+	path = ~/.gitconfig-perso

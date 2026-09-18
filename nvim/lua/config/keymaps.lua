@@ -14,3 +14,18 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right, keep selection" })
 
 -- Paste over a selection without overwriting the clipboard
 vim.keymap.set("v", "<leader>p", '"_dP', { desc = "Paste without losing the yank" })
+
+-- Quit with a single <leader>q. LazyVim binds <leader>qq, which has to go first:
+-- with both mapped, vim would wait 'timeoutlen' on every <leader>q to see
+-- whether a second q follows. The session commands move to <leader>Q, in
+-- lua/plugins/session.lua.
+pcall(vim.keymap.del, "n", "<leader>qq")
+vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
+
+-- Close the buffer with a single Q. Buffers are walked with H and L, so closing
+-- one belongs on the same shift+letter row. Q's default is Ex mode, never used,
+-- and autocmds.lua auto-saves, so a stray press costs nothing. <leader>bd still
+-- works for the LazyVim muscle memory.
+vim.keymap.set("n", "Q", function()
+  Snacks.bufdelete()
+end, { desc = "Close buffer" })

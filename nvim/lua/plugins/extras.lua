@@ -8,6 +8,12 @@ return {
       picker = {
         sources = {
           explorer = {
+            -- dotfiles stay visible: this is a config repo, .zshrc and
+            -- .gitconfig are the files being edited, not noise
+            hidden = true,
+            -- but gitignored files stay out (.venv, node_modules, ...).
+            -- `H` and `I` toggle either one live in the explorer.
+            ignored = false,
             win = { list = { keys = { ["q"] = false, ["<esc>"] = false } } },
           },
         },
@@ -30,6 +36,4 @@ return {
   },
   -- Indentation visuelle
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-  -- Commentaires rapides
-  { "numToStr/Comment.nvim", opts = {} },
 }

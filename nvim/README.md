@@ -4,7 +4,7 @@ Neovim on [LazyVim](https://lazyvim.github.io/), synced to `~/.config/nvim/` by 
 Plugin versions pinned in `lazy-lock.json`.
 
 Leader is `Space`. Press it alone and wait: which-key lists everything available.
-Strict minimum to code: [`CODING.md`](CODING.md). Long-form guide: [`../CHEATSHEET.md`](../CHEATSHEET.md).
+Acting on code: [`CODING.md`](CODING.md). Moving around: [`../NAVIGATION.md`](../NAVIGATION.md).
 
 ## Structure
 

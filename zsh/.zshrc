@@ -1,14 +1,29 @@
+# ─── HOMEBREW ───────────────────────────────────────────────
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+
+# ─── 🛠️  LOCAL BIN ───────────────────────────────────────────
+typeset -U path PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 # ─── OH MY POSH ─────────────────────────────────────────────
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/zash.omp.json)"
 
-# ─── HOMEBREW ───────────────────────────────────────────────
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-# this account is not admin: casks go to ~/Applications, otherwise brew asks for sudo
-export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+# ─── ✍️   EDITOR ─────────────────────────────────────────────
+export EDITOR='nvim'
+export VISUAL='nvim'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT='-c'
 
-# ─── 🛠️ LOCAL BIN ───────────────────────────────────────────
-# User-installed CLIs (qmk, uv, ...) live here
-export PATH="$HOME/.local/bin:$PATH"
+# ─── ⌨️  LINE EDITING ────────────────────────────────────────
+# emacs keymap, stated rather than inherited: zsh picks vi mode when $EDITOR
+# matches *vi*, and "nvim" does. It reads EDITOR at startup, before this file,
+# so the default holds today, but an EDITOR exported from a parent process
+# would silently flip every Ctrl+A into a vi motion.
+bindkey -e
+# empty WORDCHARS: Alt+B, Alt+F and Ctrl+W stop at / . - _ rather than treating
+# a whole path as a single word
+WORDCHARS=''
 
 # ─── BASIC ALIASES ──────────────────────────────────────────
 alias e='nvim'
@@ -21,11 +36,16 @@ alias back='cd -'
 alias cce='set -a && source .env && claude'
 
 # ─── 📝 CONFIG FILE SHORTCUTS ───────────────────────────────
-alias sync-config='~/raph_config/sync.sh'
-alias config='nvim ~/.zshrc'
-alias gconfig='nvim ~/.gitconfig'
-alias confposh='nvim ~/.config/oh-my-posh/zash.omp.json'
-alias confvim='nvim ~/.config/nvim'
+# sourced, not executed: run as a script, sync.sh reloads its own subshell and
+# dies with it, so this shell never sees the new aliases
+alias sync-config='source ~/raph_config/sync.sh'
+# every one of these opens the file in the REPO, never the copy under ~: the
+# copies are overwritten on the next sync, so edits there are lost silently
+alias config='nvim ~/raph_config/zsh/.zshrc'
+alias gconfig='nvim ~/raph_config/git/.gitconfig'
+alias confposh='nvim ~/raph_config/zsh/zash.omp.json'
+alias confvim='nvim ~/raph_config/nvim'
+alias conftask='nvim ~/raph_config/taskwarrior/.taskrc'
 
 # ─── 🔍 SEARCH & FIND ───────────────────────────────────────
 # fd and rg read .gitignore, so no manual venv/.git/node_modules excludes
@@ -33,11 +53,139 @@ alias ff='fd'                    # ff <name>    file by name
 alias fgrep='rg'                 # fgrep <txt>  search file contents
 
 # ─── 🧭 NAVIGATION ──────────────────────────────────────────
-# zoxide: learns the directories you visit, `z raph` jumps to ~/raph_config
-eval "$(zoxide init zsh)"
+# zoxide takes over `cd` entirely: `cd raph` jumps to ~/raph_config from
+# anywhere, while `cd ..`, `cd -` and `cd /abs/path` keep their usual meaning.
+# `cdi` opens an fzf picker over the ranked matches.
+eval "$(zoxide init zsh --cmd cd)"
+# one letter for the two that get typed all day
+alias c='cd'
+alias ci='cdi'
 
-# fzf: Ctrl+R history, Ctrl+T file paths, Alt+C cd into a subdirectory
+# yazi: `y` rather than `yazi`, so the shell lands in the directory you browsed
+# to instead of the one you started from
+y() {
+      local tmp target
+      tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+      yazi "$@" --cwd-file="$tmp"
+      target="$(<"$tmp")"
+      # builtin cd on purpose: the path is already absolute, no need to send it
+      # through zoxide's matching. The chpwd hook records it either way.
+      [ -n "$target" ] && [ "$target" != "$PWD" ] && builtin cd -- "$target"
+      rm -f -- "$tmp"
+}
+
+# ─── 🌱 DIRENV ──────────────────────────────────────────────
+# per-directory environments: an .envrc is loaded on entry, unloaded on exit.
+# Must come after any prompt init, it hooks into precmd.
+eval "$(direnv hook zsh)"
+
+# ─── 🔎 FZF ─────────────────────────────────────────────────
+# Ctrl+R history, Ctrl+T file paths, Alt+C cd into a subdirectory
 eval "$(fzf --zsh)"
+
+# fd rather than find: it reads .gitignore, skips .git, and is much faster.
+# --hidden is on because dotfiles are exactly what this machine edits.
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+# bg:-1 keeps the terminal background, so wezterm's opacity shows through
+export FZF_DEFAULT_OPTS="
+  --height 60% --layout reverse --border rounded --info inline
+  --color fg:#c0caf5,bg:-1,hl:#7aa2f7
+  --color fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff
+  --color info:#7aa2f7,prompt:#7dcfff,pointer:#bb9af7
+  --color marker:#9ece6a,spinner:#9ece6a,header:#565f89,border:#414868
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'alt-up:preview-half-page-up,alt-down:preview-half-page-down'
+"
+
+# Ctrl+T: the file, syntax highlighted, first 200 lines
+export FZF_CTRL_T_OPTS="
+  --preview 'bat --color=always --style=numbers --line-range=:200 {}'
+  --preview-window 'right,60%,border-left'
+"
+
+# Alt+C: the directory as a tree
+export FZF_ALT_C_OPTS="
+  --preview 'eza --tree --level=2 --color=always --group-directories-first {}'
+  --preview-window 'right,50%,border-left'
+"
+
+# Ctrl+R: long commands wrap in the preview instead of being truncated.
+# {2..} drops the history index fzf prefixes each line with.
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {2..}' --preview-window 'down,3,wrap,border-top'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --header 'ctrl-y: copy the command'
+"
+
+# ─── 🔎 FZF POWER TOOLS ─────────────────────────────────────
+# frg [pattern]   live ripgrep over the project: the search reruns on every
+# keystroke, the preview shows the hit in context, Enter opens nvim on the line
+frg() {
+  local rg_cmd="rg --column --line-number --no-heading --color=always --smart-case"
+  local out file line
+  out=$(
+    FZF_DEFAULT_COMMAND="$rg_cmd ${(q)${1:-\"\"}}" \
+      fzf --ansi --disabled --query "${1:-}" \
+          --bind "change:reload:$rg_cmd {q} || true" \
+          --delimiter : \
+          --preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
+          --preview-window 'right,60%,border-left,+{2}+3/3' \
+          --header 'type to search across the project'
+  ) || return
+  file=${out%%:*}
+  line=${${out#*:}%%:*}
+  [ -n "$file" ] && nvim "+$line" -- "$file"
+}
+
+# fbr   switch branch, sorted by most recent commit, with its log as preview
+fbr() {
+  local branch
+  branch=$(
+    git branch --all --color=always --sort=-committerdate |
+      grep -v HEAD |
+      fzf --ansi --header 'enter: switch to the branch' \
+          --preview 'git log --oneline --graph --date=short --color=always \
+                       --pretty="%C(auto)%cd %h%d %s" \
+                       $(sed "s/^[* ]*//;s#^remotes/[^/]*/##" <<< {}) | head -50' |
+      sed 's/^[* ]*//;s#^remotes/[^/]*/##' |
+      awk '!seen[$0]++'
+  ) || return
+  [ -n "$branch" ] && git switch "$branch"
+}
+
+# fkill [signal]  pick processes (Tab for several) and signal them.
+# Defaults to TERM, which lets the process clean up; `fkill 9` to force.
+fkill() {
+  local pids
+  pids=$(
+    ps -eo pid,ppid,%cpu,%mem,comm,args | sed 1d |
+      fzf --multi --header 'tab: select several, enter: signal them' \
+          --preview 'echo {}' --preview-window 'down,3,wrap,border-top' |
+      awk '{print $1}'
+  ) || return
+  [ -z "$pids" ] && return
+  echo "$pids" | xargs kill -"${1:-15}"
+}
+
+# flog  browse git log, preview each commit's diff, Enter copies the sha
+flog() {
+  local sha
+  sha=$(
+    git log --color=always --date=short \
+        --format='%C(auto)%h %C(blue)%cd %C(green)%an%C(auto)%d %s' "$@" |
+      fzf --ansi --no-sort --header 'enter: copy the sha' \
+          --preview 'git show --color=always --stat --patch {1}' \
+          --preview-window 'right,60%,border-left' |
+      awk '{print $1}'
+  ) || return
+  [ -n "$sha" ] && print -n "$sha" | pbcopy && echo "📋 $sha copied"
+}
+
+# one letter, it is the most used of the four
+alias f='frg'
 
 # ─── 🧰 MODERN CLI ──────────────────────────────────────────
 alias ls='eza --group-directories-first'
@@ -50,9 +198,29 @@ export BAT_THEME="TwoDark"
 alias po='poetry'
 alias test='poetry run pytest'
 alias linter='poetry run pre-commit run --all-files'
-alias pyvenv='[ -d .venv ] && source .venv/bin/activate || (python3.12 -m venv .venv && source .venv/bin/activate)'
 alias renv='rm -rf .venv && echo "✅ .venv deleted"'
 alias dbtibf='/Users/arn/ibanfirst/dbt_ibf/.venv/bin/dbt'
+pyvenv() {
+  local py="${1:-python3.12}"
+  if [ ! -d .venv ]; then
+    "$py" -m venv .venv || return 1
+  fi
+  if [ ! -f .envrc ]; then
+    command cat > .envrc <<'EOF'
+export VIRTUAL_ENV="$PWD/.venv"
+PATH_add "$VIRTUAL_ENV/bin"
+dotenv_if_exists .env
+EOF
+    direnv allow
+  fi
+  source .venv/bin/activate
+}
+
+# ─── ✅ TASKWARRIOR ─────────────────────────────────────────
+alias t='task'
+alias tt='taskwarrior-tui'
+alias ta='task add'
+alias td='task done'
 
 # ─── 💄 GITMOJI COMMIT ──────────────────────────────────────
 gc() {

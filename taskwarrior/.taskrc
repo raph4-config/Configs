@@ -1,0 +1,26 @@
+# ─── DATA ───────────────────────────────────────────────────
+data.location=~/.task
+
+# ─── THEME ──────────────────────────────────────────────────
+# blue on dark, the closest ship to Tokyo Night
+include /opt/homebrew/share/doc/task/rc/dark-blue-256.theme
+
+# ─── BEHAVIOUR ──────────────────────────────────────────────
+# no y/n prompt on every edit: nothing here is destructive enough to warrant it
+confirmation=no
+# drop the "Created task 12." style footnotes, keep headers and warnings
+verbose=blank,header,label,new-id,affected,edit
+# a week is the horizon that matters day to day
+due=7
+
+# ─── URGENCY ────────────────────────────────────────────────
+# default weights bubble up old tasks; due dates should win instead
+urgency.age.coefficient=1.0
+urgency.due.coefficient=14.0
+urgency.blocking.coefficient=8.0
+
+# ─── REPORTS ────────────────────────────────────────────────
+# `task ready` is the everyday list: unblocked, not deferred, sorted by urgency
+default.command=ready
+report.ready.columns=id,project,tags,due.relative,description
+report.ready.labels=ID,Project,Tags,Due,Description
