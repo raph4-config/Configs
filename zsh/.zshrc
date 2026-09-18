@@ -28,6 +28,7 @@ WORDCHARS=''
 # ─── BASIC ALIASES ──────────────────────────────────────────
 alias e='nvim'
 alias g='git'
+alias lg='lazygit'
 alias cl='clear'
 alias py='python3.12'
 alias python3='python3.12'
