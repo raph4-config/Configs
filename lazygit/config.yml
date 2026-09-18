@@ -1,0 +1,24 @@
+# Mirrors the gc() gitmoji helper from zsh/.zshrc: lazygit shells out to git and
+# never sees shell functions, so the convention is restated here.
+customCommands:
+  - key: "C"
+    context: "files"
+    description: "Commit (gitmoji)"
+    prompts:
+      - type: "menu"
+        key: "Type"
+        title: "Type"
+        options:
+          - { name: "✨ feat", value: "✨ feat" }
+          - { name: "🐛 fix", value: "🐛 fix" }
+          - { name: "🔧 config", value: "🔧 config" }
+          - { name: "📝 docs", value: "📝 docs" }
+          - { name: "♻️ refactor", value: "♻️ refactor" }
+          - { name: "💄 style", value: "💄 style" }
+          - { name: "✅ test", value: "✅ test" }
+          - { name: "🚀 chore", value: "🚀 chore" }
+      - type: "input"
+        key: "Message"
+        title: "Message"
+    command: 'git commit -m {{ printf "%s: %s" .Form.Type .Form.Message | quote }}'
+    loadingText: "committing"

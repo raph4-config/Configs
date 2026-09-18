@@ -15,6 +15,11 @@ cp ~/raph_config/git/.gitconfig ~/.gitconfig
 cp ~/raph_config/git/.gitconfig-perso ~/.gitconfig-perso
 echo "✅ Git"
 
+# ─── LAZYGIT ────────────────────────────────────────────────
+mkdir -p "$HOME/Library/Application Support/lazygit"
+cp ~/raph_config/lazygit/config.yml "$HOME/Library/Application Support/lazygit/config.yml"
+echo "✅ lazygit"
+
 # ─── TASKWARRIOR ────────────────────────────────────────────
 cp ~/raph_config/taskwarrior/.taskrc ~/.taskrc
 echo "✅ taskwarrior"
