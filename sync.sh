@@ -12,6 +12,7 @@ echo "✅ Oh My Posh theme"
 
 # ─── GIT ────────────────────────────────────────────────────
 cp ~/raph_config/git/.gitconfig ~/.gitconfig
+cp ~/raph_config/git/.gitconfig-perso ~/.gitconfig-perso
 echo "✅ Git"
 
 # ─── TASKWARRIOR ────────────────────────────────────────────
