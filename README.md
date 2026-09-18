@@ -16,6 +16,14 @@ Personal macOS dotfiles.
 | `cli/`       | modern CLI tools (eza, bat, fd, rg, dust, delta, fzf, zoxide) |
 | `shortcuts/` | cheat-sheets for things with no config here (macOS, Chrome)   |
 
+## Cheat-sheets
+
+| Where                         | File                                         |
+| ----------------------------- | -------------------------------------------- |
+| Moving around, at every layer | [`NAVIGATION.md`](NAVIGATION.md)             |
+| Acting on code in nvim        | [`nvim/CODING.md`](nvim/CODING.md)           |
+| macOS, Chrome                 | [`shortcuts/`](shortcuts)                    |
+
 ## Install
 
 - Config path: `~/raph_config` (this repo is the source of truth)

@@ -21,3 +21,11 @@ vim.keymap.set("v", "<leader>p", '"_dP', { desc = "Paste without losing the yank
 -- lua/plugins/session.lua.
 pcall(vim.keymap.del, "n", "<leader>qq")
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
+
+-- Close the buffer with a single Q. Buffers are walked with H and L, so closing
+-- one belongs on the same shift+letter row. Q's default is Ex mode, never used,
+-- and autocmds.lua auto-saves, so a stray press costs nothing. <leader>bd still
+-- works for the LazyVim muscle memory.
+vim.keymap.set("n", "Q", function()
+  Snacks.bufdelete()
+end, { desc = "Close buffer" })

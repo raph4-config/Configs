@@ -3,7 +3,7 @@ return {
   -- Disabled while chasing a statusline that keeps blanking out: the plugin
   -- positions its floating windows in absolute screen coordinates, with
   -- nothing keeping them off the statusline row. Flip back to true to test.
-  enabled = false,
+  enabled = true,
   opts = {
     cursor_color = "#7aa2f7", -- tokyonight-night blue
 

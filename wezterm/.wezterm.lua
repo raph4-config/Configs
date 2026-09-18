@@ -31,16 +31,20 @@ config.keys = {
   { key = 'd', mods = 'CMD|SHIFT', action = act.SplitVertical   { domain = 'CurrentPaneDomain' } }, -- top / bottom
   -- Close the current pane
   { key = 'w', mods = 'CMD',       action = act.CloseCurrentPane { confirm = true } },
-  -- Move focus between panes
-  { key = 'LeftArrow',  mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Left' },
-  { key = 'RightArrow', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
-  { key = 'UpArrow',    mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
-  { key = 'DownArrow',  mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
-  -- same moves, vim style
-  { key = 'h', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Left' },
-  { key = 'l', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Right' },
-  { key = 'k', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Up' },
-  { key = 'j', mods = 'CMD|ALT', action = act.ActivatePaneDirection 'Down' },
+  -- Move focus between panes. CMD alone, not CMD|ALT: two fingers instead of
+  -- three, and it keeps one rule for the whole machine, CMD outside nvim and
+  -- CTRL inside it (nvim splits stay on CTRL+hjkl).
+  -- Cost: CMD+h no longer hides WezTerm (CMD+m minimizes) and CMD+k no longer
+  -- clears the scrollback (the `cl` alias does).
+  { key = 'h', mods = 'CMD', action = act.ActivatePaneDirection 'Left' },
+  { key = 'l', mods = 'CMD', action = act.ActivatePaneDirection 'Right' },
+  { key = 'k', mods = 'CMD', action = act.ActivatePaneDirection 'Up' },
+  { key = 'j', mods = 'CMD', action = act.ActivatePaneDirection 'Down' },
+  -- same moves, for when the hand is already on the arrows
+  { key = 'LeftArrow',  mods = 'CMD', action = act.ActivatePaneDirection 'Left' },
+  { key = 'RightArrow', mods = 'CMD', action = act.ActivatePaneDirection 'Right' },
+  { key = 'UpArrow',    mods = 'CMD', action = act.ActivatePaneDirection 'Up' },
+  { key = 'DownArrow',  mods = 'CMD', action = act.ActivatePaneDirection 'Down' },
 }
 
 -- Fullscreen at launch: no config option does this, the gui-startup hook is required
