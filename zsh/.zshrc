@@ -46,7 +46,6 @@ alias config='nvim ~/raph_config/zsh/.zshrc'
 alias gconfig='nvim ~/raph_config/git/.gitconfig'
 alias confposh='nvim ~/raph_config/zsh/zash.omp.json'
 alias confvim='nvim ~/raph_config/nvim'
-alias conftask='nvim ~/raph_config/taskwarrior/.taskrc'
 
 # ─── 🔍 SEARCH & FIND ───────────────────────────────────────
 # fd and rg read .gitignore, so no manual venv/.git/node_modules excludes
@@ -186,7 +185,7 @@ flog() {
 }
 
 # one letter, it is the most used of the four
-alias f='frg'
+alias f='fzf'
 
 # ─── 🧰 MODERN CLI ──────────────────────────────────────────
 alias ls='eza --group-directories-first'
@@ -216,12 +215,6 @@ EOF
   fi
   source .venv/bin/activate
 }
-
-# ─── ✅ TASKWARRIOR ─────────────────────────────────────────
-alias t='task'
-alias tt='taskwarrior-tui'
-alias ta='task add'
-alias td='task done'
 
 # ─── 💄 GITMOJI COMMIT ──────────────────────────────────────
 gc() {
