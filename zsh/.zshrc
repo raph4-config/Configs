@@ -185,7 +185,7 @@ flog() {
 }
 
 # one letter, it is the most used of the four
-alias f='frg'
+alias f='fzf'
 
 # ─── 🧰 MODERN CLI ──────────────────────────────────────────
 alias ls='eza --group-directories-first'

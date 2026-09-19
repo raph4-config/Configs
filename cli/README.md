@@ -29,6 +29,9 @@ Ranking is frecency (frequency + recency). A fresh machine starts empty; `sync.s
 Filter syntax inside the window: `foo bar` = both, `'foo` = exact, `^src` = starts with,
 `.lua$` = ends with, `!test` = exclude.
 
+The mental model, the keys inside the window and the `frg` / `fbr` / `flog` / `fkill`
+commands are in [`fzf.md`](fzf.md).
+
 ## List files (eza)
 
 | Alias | Does                                                |

@@ -18,11 +18,12 @@ Personal macOS dotfiles.
 
 ## Cheat-sheets
 
-| Where                         | File                                         |
-| ----------------------------- | -------------------------------------------- |
-| Moving around, at every layer | [`NAVIGATION.md`](NAVIGATION.md)             |
-| Acting on code in nvim        | [`nvim/CODING.md`](nvim/CODING.md)           |
-| macOS, Chrome                 | [`shortcuts/`](shortcuts)                    |
+| Where                         | File                               |
+| ----------------------------- | ---------------------------------- |
+| Moving around, at every layer | [`NAVIGATION.md`](NAVIGATION.md)   |
+| Acting on code in nvim        | [`nvim/CODING.md`](nvim/CODING.md) |
+| Fuzzy finding, in the shell   | [`cli/fzf.md`](cli/fzf.md)         |
+| macOS, Chrome                 | [`shortcuts/`](shortcuts)          |
 
 ## Install
 
