@@ -145,10 +145,10 @@ fbr() {
   local branch
   branch=$(
     git branch --all --color=always --sort=-committerdate |
-      grep -v HEAD |
+      grep -v head |
       fzf --ansi --header 'enter: switch to the branch' \
           --preview 'git log --oneline --graph --date=short --color=always \
-                       --pretty="%C(auto)%cd %h%d %s" \
+                       --pretty="%c(auto)%cd %h%d %s" \
                        $(sed "s/^[* ]*//;s#^remotes/[^/]*/##" <<< {}) | head -50' |
       sed 's/^[* ]*//;s#^remotes/[^/]*/##' |
       awk '!seen[$0]++'

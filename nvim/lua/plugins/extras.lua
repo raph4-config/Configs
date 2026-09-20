@@ -5,6 +5,7 @@ return {
     "folke/snacks.nvim",
     opts = {
       dashboard = { enabled = false },
+      explorer = { replace_netrw = false},
       picker = {
         sources = {
           explorer = {
@@ -23,14 +24,37 @@ return {
       {
         "<leader>e",
         function()
+          local root = vim.fs.normalize(vim.fn.getcwd())
+          local file = vim.fs.normalize(vim.api.nvim_buf_get_name(0))
+          local in_root = file:find(root .. "/", 1, true) == 1
           local explorer = Snacks.picker.get({ source = "explorer" })[1]
+
           if explorer and not explorer.closed then
-            explorer:focus()
+            if explorer:is_focused() then
+              explorer:close()
+              return
+            end
+            if explorer:cwd() ~= root then
+              explorer:set_cwd(root)
+            end
+            if in_root then
+              Snacks.explorer.reveal()
+            end
+              explorer:focus()
           else
-            Snacks.explorer.reveal()
+            Snacks.explorer.open({
+              cwd = root,
+              on_show = function ()
+                if in_root then
+                  vim.schedule(function()
+                    Snacks.explorer.reveal()
+                  end)
+                end
+              end
+           })
           end
         end,
-        desc = "Explorer (focus, and never closed)",
+        desc = "Explorer (focus, and close if open)",
       },
     },
   },
