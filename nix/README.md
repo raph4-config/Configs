@@ -10,8 +10,7 @@ nix
 ├── flake.lock
 ├── flake.nix
 ├── home
-├── modules
-└── shells
+└── modules
 ```
 
 ## Commands
@@ -57,6 +56,18 @@ Run from `nix/`.
 2. Add `pkgs.<name>` to `home.packages` in `home/default.nix`.
 3. `home-manager switch --flake .`
 4. If brew had it too: `brew uninstall <name>` then `hash -r`, brew comes first in `PATH`.
+
+## Dev shells
+
+Temporary environments, gone on `exit`. Not used yet.
+
+| Command                                                     | Does                                  |
+| ----------------------------------------------------------- | ------------------------------------- |
+| `nix develop .#<shell>`                                     | enter a dev shell from the flake      |
+| `nix develop .#<shell> -c zsh`                              | same, in zsh instead of bash          |
+| `nix flake show`                                            | list the flake outputs, shells too    |
+| `nix shell nixpkgs#python311 -c python3.11 -m venv .venv`   | venv with Python 3.11, none installed |
+| `nix flake init -t github:the-nix-way/dev-templates#python` | new project flake with a dev shell    |
 
 ## Useful links
 
