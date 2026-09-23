@@ -59,20 +59,15 @@ Run from `nix/`.
 
 ## Dev shells
 
-Not used yet. A dev shell is a temporary environment entered with `nix develop` and gone
-on `exit`. Global tools belong in `modules/`, and each project's `.venv` holds its own
-dependencies, so one is only worth it when:
+Temporary environments, gone on `exit`. Not used yet.
 
-- a project needs another language version or system libraries (postgresql, openssl)
-- a personal project: put its `flake.nix` in the project repo, not here
-- a work repo that must not ship Nix files: a local `.envrc` with
-  `use flake ~/raph_config/nix#<shell>`, ignored by git
-
-Another Python version for a venv, without installing it anywhere:
-
-```sh
-nix shell nixpkgs#python311 -c python3.11 -m venv .venv
-```
+| Command                                                     | Does                                  |
+| ----------------------------------------------------------- | ------------------------------------- |
+| `nix develop .#<shell>`                                     | enter a dev shell from the flake      |
+| `nix develop .#<shell> -c zsh`                              | same, in zsh instead of bash          |
+| `nix flake show`                                            | list the flake outputs, shells too    |
+| `nix shell nixpkgs#python311 -c python3.11 -m venv .venv`   | venv with Python 3.11, none installed |
+| `nix flake init -t github:the-nix-way/dev-templates#python` | new project flake with a dev shell    |
 
 ## Useful links
 
