@@ -10,8 +10,7 @@ nix
 ├── flake.lock
 ├── flake.nix
 ├── home
-├── modules
-└── shells
+└── modules
 ```
 
 ## Commands
@@ -57,6 +56,23 @@ Run from `nix/`.
 2. Add `pkgs.<name>` to `home.packages` in `home/default.nix`.
 3. `home-manager switch --flake .`
 4. If brew had it too: `brew uninstall <name>` then `hash -r`, brew comes first in `PATH`.
+
+## Dev shells
+
+Not used yet. A dev shell is a temporary environment entered with `nix develop` and gone
+on `exit`. Global tools belong in `modules/`, and each project's `.venv` holds its own
+dependencies, so one is only worth it when:
+
+- a project needs another language version or system libraries (postgresql, openssl)
+- a personal project: put its `flake.nix` in the project repo, not here
+- a work repo that must not ship Nix files: a local `.envrc` with
+  `use flake ~/raph_config/nix#<shell>`, ignored by git
+
+Another Python version for a venv, without installing it anywhere:
+
+```sh
+nix shell nixpkgs#python311 -c python3.11 -m venv .venv
+```
 
 ## Useful links
 
