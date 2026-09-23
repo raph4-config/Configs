@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 {
 
-  imports = [ ../modules/cli.nix ];
+  imports = [ 
+    ../modules/cli.nix
+    ../modules/python.nix
+  ];
 
   home.username = "arn";
 
