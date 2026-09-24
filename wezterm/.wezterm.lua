@@ -40,11 +40,17 @@ config.keys = {
   { key = 'l', mods = 'CMD', action = act.ActivatePaneDirection 'Right' },
   { key = 'k', mods = 'CMD', action = act.ActivatePaneDirection 'Up' },
   { key = 'j', mods = 'CMD', action = act.ActivatePaneDirection 'Down' },
-  -- same moves, for when the hand is already on the arrows
-  { key = 'LeftArrow',  mods = 'CMD', action = act.ActivatePaneDirection 'Left' },
-  { key = 'RightArrow', mods = 'CMD', action = act.ActivatePaneDirection 'Right' },
-  { key = 'UpArrow',    mods = 'CMD', action = act.ActivatePaneDirection 'Up' },
-  { key = 'DownArrow',  mods = 'CMD', action = act.ActivatePaneDirection 'Down' },
+
+  { key = 'Backspace',  mods = 'CMD',       action = act.SendString '\x1b\x7f' },
+  { key = 'Backspace',  mods = 'CMD|SHIFT', action = act.SendString '\x1bd' },
+  { key = 'LeftArrow',  mods = 'CMD|SHIFT', action = act.SendString '\x1b[H' },
+  { key = 'RightArrow', mods = 'CMD|SHIFT', action = act.SendString '\x1b[F' },
+  { key = 'LeftArrow',  mods = 'CMD',       action = act.SendString '\x1bb' },
+  { key = 'RightArrow', mods = 'CMD',       action = act.SendString '\x1bf' },
+  { key = 'UpArrow',    mods = 'CMD',       action = act.SendString '\x1b{' },
+  { key = 'DownArrow',  mods = 'CMD',       action = act.SendString '\x1b}' },
+  { key = 'u',          mods = 'CMD',       action = act.SendString '\x1f' },
+  { key = 'u',          mods = 'CMD|SHIFT', action = act.SendString '\x1bU' },
 }
 
 -- Fullscreen at launch: no config option does this, the gui-startup hook is required

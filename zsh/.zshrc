@@ -21,6 +21,9 @@ export MANROFFOPT='-c'
 # so the default holds today, but an EDITOR exported from a parent process
 # would silently flip every Ctrl+A into a vi motion.
 bindkey -e
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[U' redo
 # empty WORDCHARS: Alt+B, Alt+F and Ctrl+W stop at / . - _ rather than treating
 # a whole path as a single word
 WORDCHARS=''
