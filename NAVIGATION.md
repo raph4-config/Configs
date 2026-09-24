@@ -40,7 +40,7 @@ More in [`shortcuts/macos.md`](shortcuts/macos.md).
 | ------------------- | ------------------- |
 | Split right         | `⌘ D`               |
 | Split down          | `⌘ ⇧ D`             |
-| **Between panes**   | `⌘ h j k l` or `⌘ ←↓↑→` |
+| **Between panes**   | `⌘ h j k l`         |
 | Close pane          | `⌘ W`               |
 | New tab             | `⌘ T`               |
 | Tab 1 to 9          | `⌘ 1` … `⌘ 9`       |
