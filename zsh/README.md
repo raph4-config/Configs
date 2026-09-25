@@ -1,110 +1,49 @@
 # zsh
 
-Shell config: oh-my-posh prompt, autosuggestions, syntax highlighting, completions, plus aliases and helper functions. Synced to `~/.zshrc` by `sync.sh`.
+`.zshrc` and the oh-my-posh theme, copied into place by `sync-config`.
 
-## Basics
+| Alias                                         | Does                                  |
+| --------------------------------------------- | ------------------------------------- |
+| `e` / `g` / `lg` / `cl`                       | nvim / git / lazygit / clear          |
+| `py`                                          | `python3.12`                          |
+| `reload`                                      | reload `.zshrc`                       |
+| `back`                                        | previous folder                       |
+| `sync-config`                                 | copy this repo into place             |
+| `config` / `gconfig` / `confposh` / `confvim` | edit zsh / git / prompt / nvim config |
+| `cc` / `cce`                                  | claude / claude with `.env` loaded    |
+| `fz` / `db`                                   | FileZilla / DBeaver                   |
 
-| Alias            | Action                |
-| ---------------- | --------------------- |
-| `e`              | `nvim`                |
-| `g`              | `git`                 |
-| `cl`             | `clear`               |
-| `py` / `python3` | `python3.12`          |
-| `reload`         | re-source `~/.zshrc`  |
-| `back`           | `cd -` (previous dir) |
+## Python
 
-## Config shortcuts
-
-| Alias         | Action                      |
-| ------------- | --------------------------- |
-| `sync-config` | run `~/raph_config/sync.sh` |
-| `config`      | edit `~/.zshrc`             |
-| `gconfig`     | edit `~/.gitconfig`         |
-| `confposh`    | edit oh-my-posh theme       |
-| `confvim`     | edit nvim config            |
-
-## Search, listing, navigation
-
-Provided by the modern CLI tools (`ff`, `fgrep`, `ls`, `ll`, `lt`, `cat`, `z`, `zi`, fzf keys):
-see [`../cli/README.md`](../cli/README.md).
-
-## Python & Poetry
-
-| Alias    | Action                                  |
+| Alias    | Does                                    |
 | -------- | --------------------------------------- |
-| `po`     | `poetry`                                |
+| `pyvenv` | create and activate `.venv`             |
+| `renv`   | delete `.venv`                          |
+| `po`     | poetry                                  |
 | `test`   | `poetry run pytest`                     |
 | `linter` | `poetry run pre-commit run --all-files` |
-| `pyvenv` | activate `.venv` (create if missing)    |
-| `renv`   | delete `.venv`                          |
 
-## Colima
+## Gitmoji
 
-| Alias      | Action                         |
-| ---------- | ------------------------------ |
-| `cstart`   | start (60GB / 8GB RAM / 4 CPU) |
-| `cstop`    | stop                           |
-| `crestart` | stop + start                   |
-| `cstatus`  | status                         |
-| `cdelete`  | delete VM                      |
-| `clist`    | list                           |
-| `cssh`     | ssh into VM                    |
+`gc feat :add login` commits `✨ feat: add login`.
 
-## Docker
+| Type                | Emoji  |
+| ------------------- | ------ |
+| `fix` / `feat`      | 🐛 / ✨  |
+| `docs` / `style`    | 📝 / 💄  |
+| `refactor` / `test` | ♻️ / ✅ |
+| `chore` / `config`  | 🚀 / 🔧  |
 
-| Alias             | Action                     |     | Alias            | Action                      |
-| ----------------- | -------------------------- | --- | ---------------- | --------------------------- |
-| `d`               | `docker`                   |     | `dstop`          | stop running containers     |
-| `dc`              | `docker compose`           |     | `dstopall`       | stop all containers         |
-| `dps` / `dpsa`    | `ps` / `ps -a`             |     | `drm`            | remove all containers       |
-| `dimg`            | `images`                   |     | `drmiall`        | remove all images           |
-| `dvol` / `dnet`   | `volume ls` / `network ls` |     | `dclean`         | `system prune -af`          |
-| `dlogs`           | `logs -f`                  |     | `dcleanvol`      | `volume prune -f`           |
-| `dinspect`        | `inspect`                  |     | `dnuke`          | prune all + volumes         |
-| `dstats` / `dtop` | `stats` / `top`            |     | `drun` / `dexec` | `run -it --rm` / `exec -it` |
+## Colima and Docker
 
-### Docker Compose
-
-| Alias                  | Action             |
-| ---------------------- | ------------------ |
-| `dcup` / `dcdown`      | `up -d` / `down`   |
-| `dcrestart` / `dcstop` | `restart` / `stop` |
-| `dclogs` / `dcps`      | `logs -f` / `ps`   |
-| `dcbuild` / `dcpull`   | `build` / `pull`   |
-
-## Apps
-
-| Alias | Action         |
-| ----- | -------------- |
-| `fz`  | open FileZilla |
-| `db`  | open DBeaver   |
-| `cc`  | `claude`       |
-
-## Functions
-
-| Function            | Action                                                        |
-| ------------------- | ------------------------------------------------------------- |
-| `gc <type> :<msg>`  | gitmoji commit (see below); otherwise passes through to `git` |
-| `ccheck`            | start Colima if not running                                   |
-| `cinfo`             | Colima status + containers + images overview                  |
-| `creload`           | restart Colima                                                |
-| `dsh <container>`   | shell into a container (bash, falls back to sh)               |
-| `dlf <container>`   | follow a container's logs                                     |
-| `dkill <container>` | stop + remove a container                                     |
-| `drmi <image>`      | remove an image                                               |
-| `dimgsize`          | list images sorted by size                                    |
-
-## Gitmoji (`gc`)
-
-Usage: `gc feat :add login form` → commits `✨ feat: add login form`.
-
-| Type       | Prefix       |
-| ---------- | ------------ |
-| `fix`      | 🐛 fix:      |
-| `feat`     | ✨ feat:     |
-| `docs`     | 📝 docs:     |
-| `style`    | 💄 style:    |
-| `refactor` | ♻️ refactor: |
-| `test`     | ✅ test:     |
-| `chore`    | 🚀 chore:    |
-| `config`   | 🔧 config:   |
+| Alias                           | Does                                    |
+| ------------------------------- | --------------------------------------- |
+| `cstart` / `cstop` / `crestart` | start / stop / restart Colima           |
+| `cstatus` / `cinfo`             | status / status, containers, images     |
+| `d` / `dc`                      | docker / docker compose                 |
+| `dps` / `dpsa` / `dimg`         | containers / all containers / images    |
+| `dsh <c>` / `dlf <c>`           | shell into / follow logs of a container |
+| `drun` / `dexec`                | `run -it --rm` / `exec -it`             |
+| `dstop` / `dkill <c>`           | stop all / stop and remove one          |
+| `dcup` / `dcdown` / `dclogs`    | compose up / down / logs                |
+| `dclean` / `dnuke`              | prune all / prune all with volumes      |

@@ -1,37 +1,18 @@
-# Corne (crkbd) — keymap `arn`
+# keyboard
 
-42-key split. AZERTY letters emitted as US keycodes, so macOS stays on **ABC/US**.
-Three layers, modifiers on the home row.
+QMK keymap `arn` for the Corne (crkbd), copied into `~/qmk_firmware` by `sync-config`.
+AZERTY letters sent as US keycodes, macOS stays on ABC.
 
-## Modifiers — home row
+## Home row
+
+Tap = letter, hold = modifier. Opposite hand fires at once, same hand needs a beat.
 
 ```text
         q   s   d   f              j   k   l   m
         ⌘   ⌥   ⌃   ⇧              ⇧   ⌃   ⌥   ⌘
 ```
 
-Tap = the letter. Hold = the modifier. Mirrored, so every modifier exists on both hands.
-
-**One rule: opposite hand fires instantly, same hand needs a beat.**
-
-| Combo             | How                                                          |
-| ----------------- | ------------------------------------------------------------ |
-| `⌥ →` word nav    | hold `s` (left) + RAISE `l` (right)                          |
-| `⌥ ⌫` delete word | hold `s` (left) + BSPC (right thumb)                         |
-| `⌃ a` line start  | hold `k` (right) + `a` (left)                                |
-| `⌘ ⌫`             | left thumb ⌘ + BSPC — thumbs are plain mods, no rule applies |
-| `⌥ f`             | same hand: hold `s` ~0.2 s _before_ `f`                      |
-
-Typing "de", "sa" or "kl" at speed can never fire a modifier: under 200 ms on the same
-hand, QMK always resolves to the letter (`CHORDAL_HOLD` in `config.h`).
-
-⌘ is still on the left thumb and ⇧ on the outer columns, so ⌘C / ⌘V are unchanged.
-
-## Layers
-
-Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
-
-### BASE
+## BASE
 
 ```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -46,9 +27,7 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
             └───┴───┴───┘   └───┴───┴───┘
 ```
 
-`'` `_` `.` `,` are direct, no layer needed.
-
-### LOWER — symbols left, numpad right
+## LOWER (left thumb)
 
 ```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -62,7 +41,7 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
             └───┴───┴───┘   └───┴───┴───┘
 ```
 
-### RAISE — navigation
+## RAISE (right thumb)
 
 ```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -76,10 +55,7 @@ Left thumb = LOWER · right thumb = RAISE · both = ADJUST.
             └───┴───┴───┘   └───┴───┴───┘
 ```
 
-Arrows follow vim: `H J K L`. Word nav = home row `⌥` + arrow.
-Backtick sits top-left, mirroring `~` on LOWER. `⌘\`` cycles the windows of the front app.
-
-### ADJUST — system and media
+## ADJUST (both thumbs)
 
 ```text
 ┌───┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───┐
@@ -91,18 +67,11 @@ Backtick sits top-left, mirroring `~` on LOWER. `⌘\`` cycles the windows of th
 └───┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴───┘
 ```
 
-`RST` = bootloader. Caps Word: tap both shifts, one word in caps, off at space.
+`RST` = bootloader. Tap both shifts for Caps Word.
 
-## Build and flash
+## Flash
 
-Same firmware on both halves, one at a time. Bootloader is `caterina`.
-
-```sh
-./sync.sh                            # copy the keymap into ~/qmk_firmware
-qmk compile -kb crkbd/rev1 -km arn   # verify it builds
-qmk flash   -kb crkbd/rev1 -km arn   # then reset the half that is plugged in
-```
-
-At `Detecting caterina bootloader…`, plug in one half alone and hit reset (double-tap,
-or the `RST` key on ADJUST). Repeat for the other half. `SPLIT_USB_DETECT` handles
-master/slave, so there is no handedness to set.
+| Command                              | Does                                 |
+| ------------------------------------ | ------------------------------------ |
+| `qmk compile -kb crkbd/rev1 -km arn` | build                                |
+| `qmk flash -kb crkbd/rev1 -km arn`   | flash, plug one half and press reset |

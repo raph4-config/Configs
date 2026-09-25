@@ -1,43 +1,40 @@
-# raph_config
+# dotfiles
 
-Personal macOS dotfiles.
+Personal macOS config. `sync-config` copies everything into place.
 
-## Contents
+## Text
 
-| Dir          | Config                                                        |
-| ------------ | ------------------------------------------------------------- |
-| `zsh/`       | zsh, aliases, oh-my-posh theme                                |
-| `git/`       | git config and aliases                                        |
-| `wezterm/`   | WezTerm terminal                                              |
-| `nvim/`      | Neovim (LazyVim)                                              |
-| `keyboard/`  | QMK split-keyboard firmware                                   |
-| `espanso/`   | Espanso text expansion                                        |
-| `claude/`    | Claude Code skills and status line                            |
-| `cli/`       | modern CLI tools (eza, bat, fd, rg, dust, delta, fzf, zoxide) |
-| `shortcuts/` | cheat-sheets for things with no config here (macOS, Chrome)   |
+| Action                    | WezTerm (zsh)     | Neovim        |
+| ------------------------- | ----------------- | ------------- |
+| Delete previous word      | `⌘ ⌫`             | `⌘ ⌫`         |
+| Delete next word          | `⌘ ⇧ ⌫`           | `⌘ ⇧ ⌫`       |
+| Line start / end          | `⌘ ⇧ ←` / `⌘ ⇧ →` | `0` / `$`     |
+| Previous / next word      | `⌘ ←` / `⌘ →`     | `⌘ ←` / `⌘ →` |
+| Previous / next paragraph | none              | `⌘ ↑` / `⌘ ↓` |
+| Undo / redo               | `⌘ u` / `⌘ ⇧ u`   | `u` / `⌃ R`   |
 
-## Cheat-sheets
+## Splits
 
-| Where                         | File                               |
-| ----------------------------- | ---------------------------------- |
-| Moving around, at every layer | [`NAVIGATION.md`](NAVIGATION.md)   |
-| Acting on code in nvim        | [`nvim/CODING.md`](nvim/CODING.md) |
-| Fuzzy finding, in the shell   | [`cli/fzf.md`](cli/fzf.md)         |
-| macOS, Chrome                 | [`shortcuts/`](shortcuts)          |
+| Action              | WezTerm     | Neovim      |
+| ------------------- | ----------- | ----------- |
+| Split left \| right | `⌘ D`       | `␣ \|`      |
+| Split top / bottom  | `⌘ ⇧ D`     | `␣ -`       |
+| Move between splits | `⌘ h j k l` | `⌃ h j k l` |
+| Close               | `⌃ D`       | `␣ w d`     |
 
-## Install
+## Folders
 
-- Config path: `~/raph_config` (this repo is the source of truth)
-- Command to synchronise: `sync-config`
-
-### Claude Code status line
-
-`sync.sh` copies `claude/statusline.sh` to `~/.claude/statusline.sh`. Enabling it is a one-time
-manual step, because `~/.claude/settings.json` is not synced:
-
-```json
-"statusLine": { "type": "command", "command": "~/.claude/statusline.sh", "padding": 2 }
-```
-
-Requires `jq`. Shows model, effort, worktree and PR, plus a context bar that turns yellow at 50%
-and red at 80%, with cost, session duration and the 5-hour quota.
+| Folder                              | Config                             |
+| ----------------------------------- | ---------------------------------- |
+| [`claude/`](claude/README.md)       | Claude Code skills and status line |
+| [`cli/`](cli/README.md)             | eza, bat, fd, rg, dust, delta, fzf |
+| [`direnv/`](direnv/README.md)       | direnv                             |
+| [`espanso/`](espanso/README.md)     | text expansion                     |
+| [`git/`](git/README.md)             | git config and aliases             |
+| [`keyboard/`](keyboard/README.md)   | QMK firmware for the Corne         |
+| [`lazygit/`](lazygit/README.md)     | lazygit                            |
+| [`nix/`](nix/README.md)             | Home Manager packages              |
+| [`nvim/`](nvim/README.md)           | Neovim (LazyVim)                   |
+| [`shortcuts/`](shortcuts/README.md) | macOS and Chrome                   |
+| [`wezterm/`](wezterm/README.md)     | WezTerm                            |
+| [`zsh/`](zsh/README.md)             | zsh, aliases, oh-my-posh           |

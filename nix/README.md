@@ -1,4 +1,4 @@
-# NIX
+# nix
 
 User environment managed by [Home Manager](https://nix-community.github.io/home-manager)
 in standalone mode, through a flake.

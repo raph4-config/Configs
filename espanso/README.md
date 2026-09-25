@@ -1,10 +1,9 @@
 # espanso
 
-Text-expansion config. Themed match files under `match/`, profile in `config/default.yml`. Synced to espanso's config dir by `sync.sh`.
+Text expansion, copied to espanso's config folder by `sync-config`.
+`$|$` marks where the cursor lands.
 
-`$|$` in a snippet marks where the cursor lands after expansion.
-
-## Pro — `pro.yml` (prefix `;`)
+## Pro (`pro.yml`)
 
 | Trigger    | Expands to                         |
 | ---------- | ---------------------------------- |
@@ -25,22 +24,22 @@ Text-expansion config. Themed match files under `match/`, profile in `config/def
 | `;recap`   | meeting recap                      |
 | `;cu`      | closing line                       |
 
-## SQL Snowflake — `sql.yml` (prefix `;q`)
+## SQL Snowflake (`sql.yml`)
 
-| Trigger    | Expands to                 |
-| ---------- | -------------------------- |
-| `;qsel`    | `SELECT * FROM`            |
-| `;qcnt`    | `SELECT COUNT(*) FROM`     |
-| `;qd2d`    | `::DATE` (datetime → date) |
-| `;qtodate` | `TO_DATE()`                |
-| `;qtrunc`  | `DATE_TRUNC('month', )`    |
-| `;qdadd`   | `DATEADD('day', 1, )`      |
-| `;qddiff`  | `DATEDIFF('day', , )`      |
-| `;qcdate`  | `CURRENT_DATE`             |
-| `;qcts`    | `CURRENT_TIMESTAMP()`      |
-| `;qlimit`  | `LIMIT 100`                |
+| Trigger    | Expands to              |
+| ---------- | ----------------------- |
+| `;qsel`    | `SELECT * FROM`         |
+| `;qcnt`    | `SELECT COUNT(*) FROM`  |
+| `;qd2d`    | `::DATE`                |
+| `;qtodate` | `TO_DATE()`             |
+| `;qtrunc`  | `DATE_TRUNC('month', )` |
+| `;qdadd`   | `DATEADD('day', 1, )`   |
+| `;qddiff`  | `DATEDIFF('day', , )`   |
+| `;qcdate`  | `CURRENT_DATE`          |
+| `;qcts`    | `CURRENT_TIMESTAMP()`   |
+| `;qlimit`  | `LIMIT 100`             |
 
-## Python — `python.yml` (prefix `;p`)
+## Python (`python.yml`)
 
 | Trigger  | Expands to                   |
 | -------- | ---------------------------- |
@@ -53,24 +52,22 @@ Text-expansion config. Themed match files under `match/`, profile in `config/def
 | `;pbp`   | `breakpoint()`               |
 | `;plc`   | list comprehension           |
 
-## Emojis — `emoji.yml`
-
-Three distinct prefixes, no overlap.
+## Emojis (`emoji.yml`)
 
 ### Dev (`;;`)
 
-| `;;rocket` 🚀 | `;;sparkle` ✨ | `;;bug` 🐛  | `;;fire` 🔥 | `;;check` ✅ |
-| ------------- | -------------- | ----------- | ----------- | ------------ |
+| `;;rocket` 🚀 | `;;sparkle` ✨  | `;;bug` 🐛   | `;;fire` 🔥 | `;;check` ✅ |
+| ------------ | -------------- | ----------- | ---------- | ----------- |
 | `;;wrench` 🔧 | `;;recycle` ♻️ | `;;warn` ⚠️ | `;;memo` 📝 | `;;boom` 💥  |
 
 ### Teams (`@@`)
 
 | `@@up` 👍    | `@@down` 👎 | `@@ok` 👌   | `@@eyes` 👀 | `@@party` 🎉  |
-| ------------ | ----------- | ----------- | ----------- | ------------- |
+| ----------- | ---------- | ---------- | ---------- | ------------ |
 | `@@think` 🤔 | `@@pray` 🙏 | `@@clap` 👏 | `@@100` 💯  | `@@muscle` 💪 |
 
 ### Normal (`::`)
 
-| `::smile` 😄 | `::laugh` 😂 | `::wink` 😉 | `::cool` 😎  | `::love` 😍 |
-| ------------ | ------------ | ----------- | ------------ | ----------- |
-| `::wow` 😮   | `::sad` 😞   | `::cry` 😢  | `::heart` ❤️ |             |
+| `::smile` 😄 | `::laugh` 😂 | `::wink` 😉 | `::cool` 😎   | `::love` 😍 |
+| ----------- | ----------- | ---------- | ------------ | ---------- |
+| `::wow` 😮   | `::sad` 😞   | `::cry` 😢  | `::heart` ❤️ |            |
