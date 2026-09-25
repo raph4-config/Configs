@@ -20,10 +20,6 @@ mkdir -p "$HOME/Library/Application Support/lazygit"
 cp ~/raph_config/lazygit/config.yml "$HOME/Library/Application Support/lazygit/config.yml"
 echo "✅ lazygit"
 
-# ─── TASKWARRIOR ────────────────────────────────────────────
-cp ~/raph_config/taskwarrior/.taskrc ~/.taskrc
-echo "✅ taskwarrior"
-
 # ─── DIRENV ─────────────────────────────────────────────────
 mkdir -p ~/.config/direnv
 cp ~/raph_config/direnv/direnv.toml ~/.config/direnv/direnv.toml
