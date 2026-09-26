@@ -5,6 +5,7 @@
     ../modules/cli.nix
     ../modules/python.nix
     ../modules/skhd.nix
+    ../modules/jankyborders.nix
   ];
 
   home.username = "arn";
