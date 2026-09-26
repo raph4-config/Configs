@@ -75,33 +75,32 @@ Add a `permissions` block that denies read and write access to credential files:
 
 ```json
 {
-  "permissions": {
-    "deny": [
-      "Read(.env)",
-      "Write(.env)",
-      "Read(.env.*)",
-      "Write(.env.*)",
-      "Read(*.key)",
-      "Write(*.key)",
-      "Read(*.pem)",
-      "Write(*.pem)",
-      "Read(*.p12)",
-      "Write(*.p12)",
-      "Read(*.pfx)",
-      "Write(*.pfx)",
-      "Read(*credentials*)",
-      "Write(*credentials*)",
-      "Read(*secret*)",
-      "Write(*secret*)",
-      "Read(.netrc)",
-      "Write(.netrc)",
-      "Read(*.token)",
-      "Write(*.token)"
-    ]
+    "permissions": {
+      "deny": [
+        "Read(.env)",
+        "Edit(.env)",
+        "Read(.env.*)",
+        "Edit(.env.*)",
+        "Read(*.key)",
+        "Edit(*.key)",
+        "Read(*.pem)",
+        "Edit(*.pem)",
+        "Read(*.p12)",
+        "Edit(*.p12)",
+        "Read(*.pfx)",
+        "Edit(*.pfx)",
+        "Read(*credentials*)",
+        "Edit(*credentials*)",
+        "Read(*secret*)",
+        "Edit(*secret*)",
+        "Read(.netrc)",
+        "Edit(.netrc)",
+        "Read(*.token)",
+        "Edit(*.token)"
+      ]
+    }
   }
-}
 ```
-
 If a `.claude/settings.json` already exists, merge the deny list rather than overwriting other settings.
 
 ### 4. Confirm
