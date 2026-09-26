@@ -54,6 +54,11 @@ config.keys = {
   { key = 'u',          mods = 'CMD|SHIFT', action = act.SendString '\x1bU' },
 }
 
+config.colors = {
+  split = '#a9b1d6'
+}
+config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.6 }
+
 -- Fullscreen at launch: no config option does this, the gui-startup hook is required
 local mux = wezterm.mux
 wezterm.on('gui-startup', function(cmd)
