@@ -1,9 +1,10 @@
 { config, pkgs, ... }:
 {
 
-  imports = [ 
+  imports = [
     ../modules/cli.nix
     ../modules/python.nix
+    ../modules/skhd.nix
   ];
 
   home.username = "arn";
