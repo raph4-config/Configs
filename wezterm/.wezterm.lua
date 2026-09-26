@@ -17,6 +17,7 @@ config.window_padding = { left = 8, right = 8, top = 8, bottom = 8 }
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false        -- the macOS fancy bar looks like a title bar
 
+config.native_macos_fullscreen_mode = true
 -- ─── KEYBOARD ───────────────────────────────────────────────
 -- Option must reach the shell as Meta, not as a compose key: that is what
 -- fzf's Alt+C and zsh's Alt+B / Alt+F / Alt+. expect. Safe on this machine,
@@ -58,6 +59,16 @@ local mux = wezterm.mux
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = mux.spawn_window(cmd or {})
   window:gui_window():toggle_fullscreen()
+end)
+
+-- New window (CMD + N) need to open wezterm in Fullscreen too
+wezterm.on('window-focus-changed', function(window)
+  local key = 'fullscreened_' .. window:window_id()
+  if not window:is_focused() or wezterm.GLOBAL[key] then return end
+  wezterm.GLOBAL[key] = true
+  if not window:get_dimensions().is_full_screen then
+    window:toggle_fullscreen()
+  end
 end)
 
 return config
