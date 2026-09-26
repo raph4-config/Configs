@@ -52,6 +52,7 @@ config.keys = {
   { key = 'DownArrow',  mods = 'CMD',       action = act.SendString '\x1b}' },
   { key = 'u',          mods = 'CMD',       action = act.SendString '\x1f' },
   { key = 'u',          mods = 'CMD|SHIFT', action = act.SendString '\x1bU' },
+  { key = 'f',          mods = 'CTRL|CMD',  action = act.ToggleFullScreen },
 }
 
 config.colors = {
